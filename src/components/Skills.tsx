@@ -5,7 +5,7 @@ import jsLogo from "../assets/js.png";
 import viteLogo from "../assets/vite.png";
 import reactLogo from "../assets/react.png";
 import tailwindLogo from "../assets/tailwind.png";
-import excelLogo from "../assets/excel.png"; 
+import excelLogo from "../assets/excel.png";
 import oracleLogo from "../assets/oracle.png";
 import { useLanguage } from "../contexts/LanguageContext";
 
