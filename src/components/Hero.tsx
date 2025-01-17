@@ -9,17 +9,18 @@ const Hero: React.FC = () => {
   return (
     <section className="relative mt-4 mb-10">
 
-      <div className="max-padd-container flex items-center justify-between h-[500px]">
+      <div className="max-padd-container flex flex-col-reverse md:flex-row items-center justify-between md:h-[500px] md:gap-4">
         {/* Left Side */}
         <motion.div
-          className="w-3/5"
+          className="mt-4 md:mt-0 md:w-3/5"
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.5, delay: 0.3 }}
         >
-          <p>{translations.hero_greeting}</p>
-          <h1 className="text-5xl font-bold text-mahogany mb-6">{translations.hero_name}</h1>
-          <p className="text-lg whitespace-pre-line">{translations.hero_about}</p>
+          <p className="md:text-lg">{translations.hero_greeting} </p>
+          <h1 className="text-2xl md:text-4xl font-bold flexCenter md:flexBetween text-mahogany mt-1 mb-2 md:mt-2 md:mb-6 ">{translations.hero_name}</h1>
+
+          <p className="text-sm md:text-lg flexCenter whitespace-pre-line">{translations.hero_about}</p>
           <div className="flex space-x-4 mt-6">
             <a
               href="/path-to-file.pdf"
@@ -34,12 +35,12 @@ const Hero: React.FC = () => {
 
         {/* Right Side */}
         <motion.div
-          className="relative w-2/5 flex items-center justify-center"
+          className=" md:w-2/5"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, delay: 0.3 }}
         >
-          <div className="bg-taupe border border-mahogany shadow-lg rounded-lg h-[450px]">
+          <div className="bg-taupe border border-mahogany shadow-lg rounded-lg h-[225px] md:h-[450px]">
             <img src={photo} alt="My Photo" className="w-full h-full object-cover rounded-lg" />
           </div>
         </motion.div>
