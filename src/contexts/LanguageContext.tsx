@@ -46,9 +46,9 @@ const translations = {
     hero_name: "João Amaral",
     hero_about: `Tenho uma licenciatura em Engenharia Eletrónica, Telecomunicações e Computadores pelo ISEL, onde construí uma base sólida em design de sistemas, programação e resolução de problemas.
 
-    A minha jornada profissional começou na indústria de telecomunicações, onde trabalhei com o RAID, uma plataforma low-code da Mobileum. O meu foco principal foi na garantia de receita, assegurando operações financeiras precisas e eficientes para os fornecedores de telecomunicações.
+    A minha jornada profissional começou na indústria de telecomunicações, onde trabalhei com o RAID, uma plataforma low-code da Mobileum (criado pela WeDo Technologies). O meu foco principal foi na revenue assurance e comsissões, assegurando operações financeiras precisas e eficientes para os fornecedores de telecomunicações.
 
-    Atualmente, transitei para o dinâmico mundo do desenvolvimento web, onde aplico a minha experiência técnica para criar aplicações centradas no utilizador e soluções digitais escaláveis.`,
+    Atualmente, transitei para o desenvolvimento web, ainda sem experiencia empresarial, mas aproveitei para desenvolver aplicações pessoais e continuo a desenvolver mais projetos.`,
     hero_downloadCV: "Download CV",
     hero_exploreMore: "Explorar Mais",
    

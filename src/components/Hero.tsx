@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
           <p className="text-sm md:text-lg flexCenter whitespace-pre-line">{translations.hero_about}</p>
           <div className="flex space-x-4 mt-6">
             <a
-              href="/path-to-file.pdf"
+              href="/CV-Joao-Amaral.pdf"
               download
               className="px-6 py-3 bg-mahogany text-white rounded-md hover:bg-mahogany/80"
             >
