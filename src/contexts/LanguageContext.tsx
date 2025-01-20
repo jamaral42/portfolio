@@ -8,37 +8,48 @@ const translations = {
   en: {
     hero_greeting: "Hello, I am",
     hero_name: "João Amaral",
-    hero_about: `I hold a Bachelor's degree in Electronic, Telecommunications, and Computer Engineering from ISEL, where I built a strong foundation in systems design, programming, and problem-solving.
+    hero_about: `I have a degree in Electronic, Telecommunications, and Computer Engineering from ISEL, where I built a solid foundation in systems design, programming, and problem-solving.
 
-    My professional journey began in the telecommunications industry, where I worked with RAID, a low-code platform by Mobileum. My primary focus was on revenue assurance, ensuring accurate and efficient financial operations for telecom providers.
+    My professional journey began in the telecommunications industry, where I worked with RAID, a low-code platform by Mobileum (created by WeDo Technologies). My main focus was on revenue assurance and commissions, ensuring accurate and efficient financial operations for telecom providers.
 
-    Currently, I’ve transitioned into the dynamic world of web development, where I apply my technical expertise to create user-centric applications and scalable digital solutions.`,
-    hero_downloadCV: "Download CV", 
+    Currently, I have transitioned to web development, still without professional experience in this area, but I have been working on personal applications and continue to develop more projects.`,
+
+    hero_downloadCV: "Download CV",
     hero_exploreMore: "Explore More",
-   
-    about_me_title: "About Me",
-    about_me_description: `Hello! I’m a curious and creative Web Developer who loves turning ideas into functional, visually appealing digital experiences. With a background in engineering and telecommunications, I bring a unique perspective to my work, combining technical precision with a flair for design.
 
-    When I’m not coding, you’ll find me exploring the latest tech trends, diving into challenging problems, or brainstorming innovative ways to enhance user experiences. I thrive on learning and continuously improving, always aiming to make a meaningful impact through my work.`,
-    skills_title: "Skills",
+    about_me_title: "About Me",
+																																																																													  
+
+    about_me_description: `I am curious, dedicated, meticulous, and detail-oriented.
+						   
+
+    Part of my professional experience consists of working with raw data to simplify and enrich it, with the purpose of clearly presenting the data and/or improving systems.
+    In this field, I gained good knowledge of technologies like RAID, Oracle SQL, and Excel, as well as tasks involving documentation, presentations, and project planning.
+
+    I still have a lot of interest in these areas but am exploring less restrictive technologies.
+
+    I returned to programming, where I already had foundations in C and Java, learned the basics of Python, but it was JavaScript and React that I enjoyed the most and have been working on.`,
+
+    skills_title: "Technologies",
 
     projects_title: "Projects",
     projects_list: [
       {
         title: "Portfolio",
-        description: "A responsive portfolio showcasing my work.",
+        description: "A portfolio showcasing some of my projects and knowledge.",
         image: portfolioImage,
-        link: "http://localhost:5173/",
+        link: "https://jamaral42.github.io/portfolio/",
       },
       {
         title: "PearTree Handcraft",
-        description: "A scalable e-commerce solution for small businesses.",
+        description: "An e-commerce solution for a small candle and artisanal decor business.",
         image: peartreeImage,
         link: "https://peartreehandcraft.pt/",
       },
     ],
+
     footer_title: "Contacts",
-    footer_text: "Developed & Designed by João Amaral.",
+    footer_text: "Developed and Designed by João Amaral.",
   },
 
   pt: {
@@ -46,29 +57,38 @@ const translations = {
     hero_name: "João Amaral",
     hero_about: `Tenho uma licenciatura em Engenharia Eletrónica, Telecomunicações e Computadores pelo ISEL, onde construí uma base sólida em design de sistemas, programação e resolução de problemas.
 
-    A minha jornada profissional começou na indústria de telecomunicações, onde trabalhei com o RAID, uma plataforma low-code da Mobileum (criado pela WeDo Technologies). O meu foco principal foi na revenue assurance e comsissões, assegurando operações financeiras precisas e eficientes para os fornecedores de telecomunicações.
+    A minha jornada profissional começou na indústria de telecomunicações, onde trabalhei com o RAID, uma plataforma low-code da Mobileum (criado pela WeDo Technologies). O meu foco principal foi em revenue assurance e comissões, assegurando operações financeiras precisas e eficientes para fornecedores de telecomunicações.
 
     Atualmente, transitei para o desenvolvimento web, ainda sem experiencia empresarial, mas aproveitei para desenvolver aplicações pessoais e continuo a desenvolver mais projetos.`,
+
     hero_downloadCV: "Download CV",
+    
     hero_exploreMore: "Explorar Mais",
    
     about_me_title: "Sobre Mim",
-    about_me_description: `Olá! Sou um Desenvolvedor Web curioso e criativo que adora transformar ideias em experiências digitais funcionais e visualmente atraentes. Com um background em engenharia e telecomunicações, trago uma perspectiva única para o meu trabalho, combinando precisão técnica com um toque de design.
 
-    Quando não estou programando, você me encontrará explorando as últimas tendências tecnológicas, enfrentando desafios complexos ou brainstormando maneiras inovadoras de melhorar as experiências dos usuários. Eu prospero em aprender e melhorar continuamente, sempre buscando causar um impacto significativo através do meu trabalho.`,
+    about_me_description: `Sou curioso, empenhado, minucioso e atento a pormenores.
+    
+    Parte da minha experiencia profissional consiste em trabalhar dados em bruto para simplificar e enriquecer com a finalidade de demonstrar os mesmos de forma clara e/ou melhorar sistemas. 
+    Neste ramo ganhei bons conhecimentos em tecnologias como RAID, Oracle SQL e Excel e em tarefas de documentação, apresentação e planeamento de projetos.
+
+    Continuo a ter bastante interesse nestas áreas mas estou a explorar tecnologias menos restritivas. 
+
+    Voltei à programação, onde já tinha bases em C e Java, aprendi as bases em Python mas foi JavaScript e React que mais gostei e nas quais estou a trabalhar.`,
+
     skills_title: "Tecnologias",
   
     projects_title: "Projetos",
     projects_list: [
       {
         title: "Portfolio",
-        description: "Um portfólio responsivo mostrando o meu trabalho.",
+        description: "Portfolio a demonstrar alguns dos meus projetos e conhecimentos.",
         image: portfolioImage,
-        link: "http://localhost:5173/",
+        link: "https://jamaral42.github.io/portfolio/",
       },
       {
         title: "PearTree Handcraft",
-        description: "Uma solução de e-commerce escalável para pequenas empresas.",
+        description: "Uma solução de e-commerce uma pequena empresa de velas e pecas artesanais.",
         image: peartreeImage,
         link: "https://peartreehandcraft.pt/",
       },
