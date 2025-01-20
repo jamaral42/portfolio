@@ -2,10 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import photo from "../assets/photo.jpg";
 import { useLanguage } from "../contexts/LanguageContext";
-import CV from "/CV-Joao-Amaral.pdf";
+import CV_EN from "/CV-Joao-Amaral-EN.pdf";
+import CV_PT from "/CV-Joao-Amaral-PT.pdf";
 
 const Hero: React.FC = () => {
-  const { translations } = useLanguage();
+  const { translations, currentLanguage  } = useLanguage();
+  const CV = currentLanguage === "pt" ? CV_PT : CV_EN;
 
   return (
     <section className="relative mt-4 mb-10">

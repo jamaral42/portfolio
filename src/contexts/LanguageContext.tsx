@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import portfolioImage from "../assets/portfolio.jpg";
+import portfolioImageEn from "../assets/portfolio_en.jpg";
+import portfolioImagePt from "../assets/portfolio_pt.jpg";
 import peartreeImage from "../assets/peartree.jpg";
 
 type Language = "en" | "pt";
@@ -37,7 +38,7 @@ const translations = {
       {
         title: "Portfolio",
         description: "A portfolio showcasing some of my projects and knowledge.",
-        image: portfolioImage,
+        image: portfolioImageEn,
         link: "https://jamaral42.github.io/portfolio/",
       },
       {
@@ -83,7 +84,7 @@ const translations = {
       {
         title: "Portfolio",
         description: "Portfolio a demonstrar alguns dos meus projetos e conhecimentos.",
-        image: portfolioImage,
+        image: portfolioImagePt,
         link: "https://jamaral42.github.io/portfolio/",
       },
       {
