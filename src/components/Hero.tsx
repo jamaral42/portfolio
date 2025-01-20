@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import photo from "../assets/photo.jpg";
 import { useLanguage } from "../contexts/LanguageContext";
+import CV from "/CV-Joao-Amaral.pdf";
 
 const Hero: React.FC = () => {
   const { translations } = useLanguage();
@@ -23,7 +24,7 @@ const Hero: React.FC = () => {
           <p className="text-sm md:text-lg flexCenter whitespace-pre-line">{translations.hero_about}</p>
           <div className="flex space-x-4 mt-6">
             <a
-              href="/CV-Joao-Amaral.pdf"
+              href={CV}
               download
               className="px-6 py-3 bg-mahogany text-white rounded-md hover:bg-mahogany/80"
             >
