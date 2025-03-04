@@ -1,34 +1,20 @@
-import React, { useEffect } from "react";
-import "./index.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import './index.css';
+import { FC, lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Hero from "./components/Hero";
-import AboutMe from "./components/AboutMe";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Footer from "./components/Footer";
-import LanguageSwitcher from "./components/LanguageSwitcher";
+const Portfolio = lazy(() => import('./pages/Portfolio'));
 
-const App: React.FC = () => {
+const Loading: FC = () => <div>Loading...</div>;
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
-
-  return (
-    <div >
-      <LanguageSwitcher />
-      <Hero />
-      <AboutMe />
-      <Skills />
-      <Projects />
-      <Footer />
-    </div>
-  );
-};
+const App: FC = () => (
+  <BrowserRouter>
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        <Route path="/" element={<Portfolio />} />
+        <Route path="*" element={<Portfolio />} />
+      </Routes>
+    </Suspense>
+  </BrowserRouter>
+);
 
 export default App;

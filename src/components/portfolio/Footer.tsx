@@ -1,15 +1,15 @@
 import React from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation(); // Use the hook
   const currentYear = new Date().getFullYear();
-  const { translations } = useLanguage();
 
   return (
-    <footer className="py-10 bg-secondary text-center">
+    <div className="relative py-10 bg-platinum text-center">
       <div className="max-padd-container flex flex-col items-center space-y-4">
-        <h1 className="text-2xl font-bold text-mahogany">{translations.footer_title}</h1>
+        <h1 className="text-2xl font-bold text-mahogany">{t('footer.title')}</h1> {/* Translate */}
         <p className="text-sm">Email: joaomramaral42@gmail.com</p>
         <div className="flex gap-4">
           <a
@@ -26,10 +26,10 @@ const Footer: React.FC = () => {
           </a>
         </div>
         <p className="text-xs mt-4">
-          &copy; {currentYear} {translations.footer_text}
+          &copy; {currentYear} {t('footer.text')} {/* Translate */}
         </p>
       </div>
-    </footer>
+    </div>
   );
 };
 

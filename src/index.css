@@ -1,43 +1,12 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+@import "tailwindcss";
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Outfit', sans-serif;
-    scroll-behavior: smooth;
-}
-html {
-    scroll-behavior: smooth;
-}
-
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: white;
-    border: 1px solid #8080802f;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #e6e6e6;
-    border-radius: 5px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #ccc;
-}
-
-.order-grid {
-    grid-template-columns: 0.5fr 3fr 1fr 1fr 1fr 1fr;
-    align-items: center;
+@theme {
+    --color-platinum : #EEEEEE; 
+    --color-tiffany-blue: #00ADB5;  
+    --color-charcoal-gray: #393E46;    
+    --color-gunmetal : #222831;
+    --font-gugi: 'Gugi', cursive;
 }
 
 
