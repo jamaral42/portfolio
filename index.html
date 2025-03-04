@@ -7,10 +7,34 @@
     <meta name="description" content="João Amaral's personal portfolio showcasing skills, projects, and experience in web development and engineering." />
     <meta name="keywords" content="João Amaral, portfolio, web development, engineering, React, TypeScript" />
     <meta name="author" content="João Amaral" />
+    <meta property="og:title" content="João Amaral's Portfolio" />
+    <meta property="og:description" content="Explore the projects and skills of João Amaral in web development and engineering." />
+    <meta property="og:image" content="URL_to_your_image" />
+    <meta property="og:url" content="http://www.joaomramaral.com/" />
+    <meta name="robots" content="index, follow" />
+
     <title>João Amaral</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "João Amaral",
+        "url": "https://yourdomain.com",
+        "sameAs": [
+          "https://www.linkedin.com/in/yourprofile",
+          "https://github.com/yourprofile"
+        ],
+        "jobTitle": "Web Developer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Your Company"
+        }
+      }
+      </script>
+      
   </body>
 </html>
