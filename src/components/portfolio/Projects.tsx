@@ -27,7 +27,7 @@ const projects = [
     titleKey: "web_projects.project3.title",
     descriptionKey: "web_projects.project3.description",
     image: standardImage,
-    link: "https://www.standardproject.com/",
+    link: "https://joaomramaral.com//",
   },
 ];
 
@@ -94,7 +94,10 @@ const Projects: React.FC = () => {
               className="p-2 md:p-4 relative z-10"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="bg-gunmetal rounded-xl flex flex-col items-center overflow-hidden">
+              <a 
+                className="bg-gunmetal rounded-xl flex flex-col items-center overflow-hidden cursor-pointer"
+                href={project.link}
+              >
                 <img
                   src={project.image}
                   alt={t(project.titleKey)}
@@ -109,8 +112,7 @@ const Projects: React.FC = () => {
                     {t(project.descriptionKey)}
                   </p>
                 </div>
-
-              </div>
+              </a>
             </motion.div>
           ))}
         </Slider>
