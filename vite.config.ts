@@ -4,6 +4,10 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    port: 3000,
+    host: '0.0.0.0',  // Necessary to allow external access
+  },
   plugins: [
     react(),
     tailwindcss()
@@ -19,6 +23,9 @@ export default defineConfig({
     },
   },
   base: '/',
+  preview: {
+    allowedHosts: ['joaomramaral.com'],
+  },  
 
 });
 
