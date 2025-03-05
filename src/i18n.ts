@@ -4,6 +4,25 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
+      cookies: {
+        message: "We use cookies to enhance your experience.",
+        accept: "Accept",
+        decline: "Decline",
+        policy_link: "Read our cookie policy.",
+        policy: {
+          title: "Cookie Policy",
+          intro: "This website uses cookies to enhance user experience and analyze site traffic.",
+          whatAreCookies: "What Are Cookies?",
+          whatAreCookiesText: "Cookies are small text files stored on your device that help websites function properly.",
+          howWeUse: "How We Use Cookies",
+          howWeUseText: "We use cookies for website analytics, functionality, and performance improvements.",
+          yourChoices: "Your Choices",
+          yourChoicesText: "You can manage your cookie preferences in your browser settings.",
+          moreInfo: "More Information",
+          moreInfoText: "For more details, please contact us.",
+          lastUpdated: "Last updated: February 2025",
+        },
+      },
       header: {
         top: "Top",
         about: "About",
@@ -213,6 +232,25 @@ const resources = {
   },
   pt: {
     translation: {
+      cookies: {
+        message: "Usamos cookies para melhorar sua experiência.",
+        accept: "Aceitar",
+        decline: "Rejeitar",
+        policy_link: "Leia nossa política de cookies.",
+        policy: {
+          title: "Política de Cookies",
+          intro: "Este site utiliza cookies para melhorar a experiência do usuário e analisar o tráfego do site.",
+          whatAreCookies: "O que são Cookies?",
+          whatAreCookiesText: "Cookies são pequenos arquivos de texto armazenados no seu dispositivo que ajudam os sites a funcionarem corretamente.",
+          howWeUse: "Como Usamos Cookies",
+          howWeUseText: "Usamos cookies para análises do site, funcionalidades e melhorias de desempenho.",
+          yourChoices: "Suas Escolhas",
+          yourChoicesText: "Você pode gerenciar suas preferências de cookies nas configurações do navegador.",
+          moreInfo: "Mais Informações",
+          moreInfoText: "Para mais detalhes, entre em contato conosco.",
+          lastUpdated: "Última atualização: Fevereiro de 2025",
+        },
+      },
       header: {
         top: "Top",
         about: "About",
