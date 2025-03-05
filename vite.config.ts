@@ -8,5 +8,18 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: 'http://www.joaomramaral.com/',
-})
+  build: {
+    outDir: 'dist', // Vite will output your production build here
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'], // Optimize larger libraries
+        },
+      },
+    },
+  },
+  base: '/',
+
+});
+
+
