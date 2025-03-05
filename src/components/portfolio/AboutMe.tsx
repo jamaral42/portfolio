@@ -12,7 +12,11 @@ const interests = [
   { icon: <FaMapPin className="w-20 text-4xl p-2" />, label: "Pins" },
 ];
 
-const AboutMe: React.FC = () => {
+interface AboutMeProps {
+  isMobile: boolean;
+}
+
+const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
   const { t } = useTranslation();
   // Extract structured content
   const aboutContent = t("about_me.content", { returnObjects: true }) as Record<string, { title: string; content: string }>;
@@ -35,7 +39,7 @@ const AboutMe: React.FC = () => {
         {/* Layout Container */}
         <div className="flex items-center w-full max-w-6xl mx-auto py-8">
           {/* Description Cards */}
-          <div className="flex flex-col gap-4 max-w-xl">
+          <div className="flex flex-col gap-4 max-w-xl w-full items-center md:items-start">
             {Object.values(aboutContent).map(({ title, content }, index) => {
               const ref = useRef<HTMLDivElement>(null);
               const isInView = useInView(ref, { amount: 0.5 });
@@ -44,9 +48,9 @@ const AboutMe: React.FC = () => {
                 <motion.div
                   ref={ref}
                   key={index}
-                  className="p-4 rounded-3xl shadow-lg flexCenter gap-4 items-center bg-charcoal-gray"
+                  className="p-4 rounded-3xl shadow-lg flexCenter gap-4 items-center bg-gunmetal w-80 md:w-auto"
                   initial={{ opacity: 0, x: index % 2 === 0 ? 100 : -100 }}
-                  animate={isInView ? { opacity: 1, x: index === 2 ? 0 : index % 2 === 0 ? 150 : 70 } : {} }
+                  animate={ isMobile ? { opacity: 1, x: 0 } : isInView ? { opacity: 1, x: index === 2 ? -150 : index % 2 === 0 ? 0 : -75 } : {} }
                   transition={{
                     type: "spring",
                     stiffness: 100,
@@ -54,8 +58,8 @@ const AboutMe: React.FC = () => {
                     duration: 1,
                   }}
                 >
-                  <p className="text-white text-xl font-semibold">{title}</p>
-                  <p className="text-white text-md">{content}</p>
+                  <p className="text-white text-md md:text-xl font-semibold">{title}</p>
+                  <p className="text-white text-sm md:text-md">{content}</p>
                 </motion.div>
               );
             })}
@@ -64,11 +68,12 @@ const AboutMe: React.FC = () => {
       </div>
       
       {/* Interest Section */}
-      <div className="bg-charcoal-gray text-platinum grid grid-cols-1 md:grid-cols-2" >
-        
-        <div className="flex flex-col items-center justify-center gap-10">
+      <div className="bg-gunmetal text-platinum flex flex-col-reverse md:grid md:grid-cols-2" >
+          
+        {/* Interests */}
+        <div className="flex flex-col items-center justify-center py-8 md:py-0 md:gap-10">
           <p className="text-white text-center text-4xl font-semibold mb-4">{t("about_me.interest_title")}</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-5 md:grid-cols-2 gap-4 md:gap-8 px-4 md:px-0">
             {interests.map((interest, index) => (
               <div key={index} className="flex flex-col items-center text-platinum">
                 <div className="flex items-center justify-center">
@@ -83,7 +88,7 @@ const AboutMe: React.FC = () => {
         {/* Layout Container */}
         <div className="flex items-center w-full max-w-6xl mx-auto py-8">
           {/* Description Cards */}
-          <div className="flex flex-col gap-4 max-w-xl">
+          <div className="flex flex-col gap-4 max-w-xl w-full items-center md:items-start">
           {Object.entries(aboutDetails).map(([key, detail], index) => {
             const ref = useRef(null);
             const isInView = useInView(ref, { amount: 0.5 });
@@ -92,9 +97,9 @@ const AboutMe: React.FC = () => {
               <motion.div
                 ref={ref}
                 key={key}
-                className="p-4 rounded-3xl shadow-lg flexCenter gap-4 items-center bg-platinum"
+                className="p-4 rounded-3xl shadow-lg flexCenter gap-4 items-center bg-platinum text-gunmetal w-80 md:w-auto"
                 initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
-                animate={isInView ? { opacity: 1, x: index === 2 ? 150 : index % 2 === 0 ? 0 : 70 } : {}}
+                animate={ isMobile ? { opacity: 1, x: 0 } : isInView ? { opacity: 1, x: index === 2 ? 150 : index % 2 === 0 ? 0 : 75 } : {}}
                 transition={{
                   type: "spring",
                   stiffness: 100,

@@ -12,10 +12,13 @@ import tailwindImg from "../../assets/tailwind.png";
 import tsImg from "../../assets/ts.png";
 import viteImg from "../../assets/vite.png";
 
+interface HeroProps {
+  isMobile: boolean;
+}
 
 const SPEED = 0.002;
 
-const Hero: React.FC = () => {
+const Hero: React.FC<HeroProps> = ({ isMobile }) => {
   const { t } = useTranslation();
   const { scrollYProgress } = useScroll();
   const [angle, setAngle] = useState(0);
@@ -37,7 +40,7 @@ const Hero: React.FC = () => {
   
   // Parallax effect transformations
   const textY = useTransform(scrollYProgress, [0, 1], [0, -1200]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 2400]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 2400]);
 
   // Handle screen resize
   const handleResize = useCallback(() => {
@@ -82,9 +85,9 @@ const Hero: React.FC = () => {
     <section>
       {/* Left Side - Text */}
       <motion.div
-        className="absolute left-[50%] md:left-[40%] top-[65%] md:top-[50%] -translate-x-1/2 -translate-y-1/2 z-20"
+        className="absolute left-[50%] md:left-[40%] top-[35%] md:top-[50%] -translate-x-1/2 -translate-y-1/2 z-20"
         style={{ y: textY }}
-        initial={{ opacity: 0, x: window.innerWidth >= 768 ? -100 : 0, y: window.innerWidth < 768 ? -100 : 0 }}
+        initial={{ opacity: 0, x: window.innerWidth >= 768 ? -100 : 0, y: isMobile ? -100 : 0 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ duration: 1.2, delay: 0.5 }}
       >

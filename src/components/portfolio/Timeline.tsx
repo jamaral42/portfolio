@@ -62,7 +62,7 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
       </h2>
 
       {/* Filter Buttons */}
-      <div className="flex justify-center mb-8 space-x-4">
+      <div className="grid grid-cols-2 justify-items-center gap-4 md:flex md:justify-center md:items-center  mb-8">
         {[
           { label: t("timeline_relevant"), value: "important", icon: <FaStar /> },
           { label: t("timeline_education"), value: "study", icon: <FaBook /> },
@@ -71,7 +71,7 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
         ].map(({ label, value, icon }) => (
           <button
             key={value}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all focus:ring cursor-pointer hover:bg-tiffany-blue hover:text-white ${
+            className={`flex items-center justify-center space-x-2 px-4 py-2 w-30 rounded-full transition-all focus:ring cursor-pointer hover:bg-tiffany-blue hover:text-white ${
               activeFilter === value ? "bg-tiffany-blue text-white" : "bg-gray-300 text-gray-800"
             }`}
             onClick={() => setActiveFilter(value)}

@@ -34,7 +34,7 @@ const projects = [
 // Custom Arrow Components
 const CustomPrevArrow = ({ onClick }: { onClick?: () => void }) => (
   <button
-    className="absolute bottom-[-30px] left-[44%] text-gunmetal text-3xl z-20 transition hover:scale-110"
+    className="absolute bottom-[-30px] left-[10%] md:left-[44%] text-gunmetal text-3xl z-20 transition hover:scale-110"
     onClick={onClick}
   >
     <HiOutlineChevronLeft />
@@ -43,7 +43,7 @@ const CustomPrevArrow = ({ onClick }: { onClick?: () => void }) => (
 
 const CustomNextArrow = ({ onClick }: { onClick?: () => void }) => (
   <button
-    className="absolute bottom-[-30px] right-[44%] text-gunmetal text-3xl z-20 transition hover:scale-110"
+    className="absolute bottom-[-30px] right-[10%] md:right-[44%] text-gunmetal text-3xl z-20 transition hover:scale-110"
     onClick={onClick}
   >
     <HiOutlineChevronRight />
@@ -86,27 +86,30 @@ const Projects: React.FC = () => {
         {t("web_projects_title")}
       </h1>
 
-      <div className="relative px-4">
+      <div className="relative md:px-4">
         <Slider {...settings}>
           {projects.map((project) => (
             <motion.div
               key={project.titleKey}
-              className="p-4 relative z-10"
+              className="p-2 md:p-4 relative z-10"
               whileHover={{ scale: 1.05 }}
             >
               <div className="bg-gunmetal rounded-xl flex flex-col items-center overflow-hidden">
                 <img
                   src={project.image}
                   alt={t(project.titleKey)}
-                  className="w-full h-60 object-cover mb-4 rounded-t-xl"
+                  className="w-full h-40 md:h-60 object-cover mb-4 rounded-t-xl"
                   loading="lazy"
                 />
-                <h2 className="text-platinum text-xl font-semibold mb-2">
-                  {t(project.titleKey)}
-                </h2>
-                <p className="text-platinum text-sm mb-4">
-                  {t(project.descriptionKey)}
-                </p>
+                <div className="text-center h-20 md:h-32">
+                  <h2 className="text-platinum text-md md:text-xl font-semibold mb-2">
+                    {t(project.titleKey)}
+                  </h2>
+                  <p className="text-platinum text-xs md:text-sm mb-4">
+                    {t(project.descriptionKey)}
+                  </p>
+                </div>
+
               </div>
             </motion.div>
           ))}
