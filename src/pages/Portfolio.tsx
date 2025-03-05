@@ -15,7 +15,7 @@ const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const [timelineHeight, setTimelineHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [totalHeight, setTotalHeight] = useState(isMobile ? 2200 : 1900);
+  const [totalHeight, setTotalHeight] = useState(timelineHeight + (isMobile ? 2200 : 1900));
 
   const aboutY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
   const timelineY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
@@ -24,12 +24,6 @@ const App: React.FC = () => {
   const footerY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
 
   const calculateBaseHeight = (width: number) => (width < 768 ? 2200 : 1900);
-
-												   
-				   
-																				  
-												
-					   
 
   useEffect(() => {
     const handleResize = () => {
