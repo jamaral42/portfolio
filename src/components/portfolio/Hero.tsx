@@ -40,7 +40,7 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
   
   // Parallax effect transformations
   const textY = useTransform(scrollYProgress, [0, 1], [0, -1200]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 2400]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 2100]);
 
   // Handle screen resize
   const handleResize = useCallback(() => {

@@ -24,11 +24,12 @@ const resources = {
         },
       },
       header: {
-        top: "Top",
+        home: "Home",
         about: "About",
         portfolio: "Portfolio",
         timeline: "Timeline",
         skills: "Skills",
+        projects: "Projects",
         contacts: "Contact",
       },
       hero: {
@@ -257,6 +258,7 @@ const resources = {
         portfolio: "Portfolio",
         timeline: "Timeline",
         skills: "Skills",
+        projects: "Projects",
         contacts: "Contact",
       },
       hero: {

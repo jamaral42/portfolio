@@ -18,6 +18,37 @@ type TimelineProps = {
   onHeightChange: Dispatch<SetStateAction<number>>;
 };
 
+const ExpandableText: React.FC<{ text: string }> = ({ text }) => {
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Expanded if either hovered or clicked
+  const expanded = isExpanded || isHovered;
+
+  useEffect(() => {
+    if (textRef.current) {
+      // When collapsed, measure clientHeight and scrollHeight
+      // Note: When expanded, the element may not be clamped, so measurement may differ.
+      setIsOverflowing(textRef.current.scrollHeight > textRef.current.clientHeight);
+    }
+  }, [text, expanded]);
+
+  return (
+    <p
+      ref={textRef}
+      className={`text-md mt-2 cursor-pointer transition-all ${expanded ? "line-clamp-none" : "line-clamp-2"}`}
+      onClick={() => setIsExpanded((prev) => !prev)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {text}
+      {isOverflowing && !expanded && <span className="text-tiffany-blue"> ...</span>}
+    </p>
+  );
+};
+
 const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
   const { t } = useTranslation();
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -62,7 +93,7 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
       </h2>
 
       {/* Filter Buttons */}
-      <div className="grid grid-cols-2 justify-items-center gap-4 md:flex md:justify-center md:items-center  mb-8">
+      <div className="grid grid-cols-2 justify-items-center gap-4 md:flex md:justify-center md:items-center mb-8">
         {[
           { label: t("timeline_relevant"), value: "important", icon: <FaStar /> },
           { label: t("timeline_education"), value: "study", icon: <FaBook /> },
@@ -108,15 +139,16 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
             >
-              {/* Connector Dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-tiffany-blue rounded-full border-4 border-white shadow-lg"></div>
+              {/* Connector Dot (Moved above content box) */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 top-12 w-4 h-4 bg-tiffany-blue rounded-full border-4 border-white shadow-lg"></div>
 
               {/* Content Box */}
               <div className="w-[48%] bg-white p-4 rounded-2xl shadow-lg text-gray-800">
                 <span className="text-tiffany-blue font-semibold">{item.date}</span>
                 <h3 className="text-lg font-bold">{item.title}</h3>
                 <p className="text-sm text-gray-600 mb-2">{item.place}</p>
-                <p className="text-md mt-2">{item.description}</p>
+                {/* Use ExpandableText for description */}
+                <ExpandableText text={item.description} />
               </div>
             </motion.div>
           ))}

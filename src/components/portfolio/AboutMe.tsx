@@ -27,7 +27,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
       <div>
         {/* Title */}
         <motion.h2
-          className="text-5xl font-bold mb-4 text-gunmetal text-center items-center relative pt-8"
+          className="text-5xl font-bold mb-4 text-gunmetal text-center items-center relative pt-8 transform -translate-x-[50px]"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,7 +50,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
                   key={index}
                   className="p-4 rounded-3xl shadow-lg flexCenter gap-4 items-center bg-gunmetal w-80 md:w-auto"
                   initial={{ opacity: 0, x: index % 2 === 0 ? 100 : -100 }}
-                  animate={ isMobile ? { opacity: 1, x: 0 } : isInView ? { opacity: 1, x: index === 2 ? -150 : index % 2 === 0 ? 0 : -75 } : {} }
+                  animate={ isMobile ? { opacity: 1, x: 0 } : isInView ? { opacity: 1, x: index === 2 ? -25 : index % 2 === 0 ? 75 : 25 } : {} }
                   transition={{
                     type: "spring",
                     stiffness: 100,
