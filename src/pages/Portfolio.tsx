@@ -11,14 +11,14 @@ const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const [timelineHeight, setTimelineHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [totalHeight, setTotalHeight] = useState(timelineHeight + (isMobile ? 2100 : 1700));
+  const [totalHeight, setTotalHeight] = useState(timelineHeight + (isMobile ? 2500 : 1700));
 
   const aboutY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
   const timelineY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
   const skillsY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
   const projectsY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
 
-  const calculateBaseHeight = (width: number) => (width < 768 ? 2300 : 1700);
+  const calculateBaseHeight = (width: number) => (width < 768 ? 2500 : 1700);
 
   useEffect(() => {
     const handleResize = () => {
