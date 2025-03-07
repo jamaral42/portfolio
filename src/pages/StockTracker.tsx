@@ -40,6 +40,7 @@ const StockTracker: React.FC = () => {
         }
       }
       setPrices(newPrices);
+      setStocks(stocks);
     };
 
     const fetchStockNews = async () => {
