@@ -1,42 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
-const LanguageSwitcher: React.FC = () => {
+const LanguageSwitch: React.FC = () => {
   const { i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(() => {
-    return localStorage.getItem("lang") || i18n.language;
-  });
-
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem("lang");
-    if (savedLanguage && savedLanguage !== i18n.language) {
-      i18n.changeLanguage(savedLanguage);
-    }
-  }, [i18n]);
-
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
-    localStorage.setItem("lang", lng);
-    setCurrentLanguage(lng);
+    localStorage.setItem("i18nextLng", lng);
   };
 
-  const languages = ["pt", "en"];
-
   return (
-    <div className="text-xs md:text-sm space-x-2 text-mahogany font-bold flex items-center">
-      {languages.map((lng) => (
-        <React.Fragment key={lng}>
-          <span
-            onClick={() => changeLanguage(lng)}
-            className={`cursor-pointer ${currentLanguage === lng ? "font-bold" : "text-gray-500"}`}
-          >
-            {lng.toUpperCase()}
-          </span>
-          {languages.indexOf(lng) < languages.length - 1 && <span>|</span>}
-        </React.Fragment>
-      ))}
+    <div className="relative top-12 left-8 w-min z-50 bg-tiffany-blue rounded-xl opacity-75 hover:opacity-100 flex items-center p-3 text-sm md:text-md gap-2 ">
+      <button
+        onClick={() => changeLanguage("en")}
+        className={`transition-colors ${i18n.language === "en" ? "font-bold text-gunmetal" : "text-gunmetal cursor-pointer"}`}
+      >
+        EN
+      </button>
+      <span className="text-gunmetal">|</span>
+      <button
+        onClick={() => changeLanguage("pt")}
+        className={`transition-colors ${i18n.language === "pt" ? "font-bold text-gunmetal" : "text-gunmetal cursor-pointer"}`}
+      >
+        PT
+      </button>
     </div>
   );
 };
 
-export default LanguageSwitcher;
+export default LanguageSwitch;

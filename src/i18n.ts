@@ -226,10 +226,11 @@ const resources = {
       contacts: {
       },
       footer: {
-        title: "Contacts",
+        title: "Get in Touch",
         text: "Developed and Designed by João Amaral",
+        downloadCV: "Download CV",
       },
-    },
+    }
   },
   pt: {
     translation: {
@@ -460,8 +461,9 @@ const resources = {
       contacts: {
       },
       footer: {
-        title: "Contacts",
+        title: "Get in Touch",
         text: "Developed and Designed by João Amaral",
+        downloadCV: "Download CV",
       },
     },
   },

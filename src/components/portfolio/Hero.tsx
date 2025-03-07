@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { AnimatePresence, motion,  useScroll, useTransform } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import LanguageSwitch from './LanguageSwitcher'; 
+import DownloadCV from './DownloadCV';
 import photo from "../../assets/photo.jpg";
 import cssImg from "../../assets/css.png";
 import excelImg from "../../assets/excel.png";
@@ -83,6 +85,9 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
 
   return (
     <section>
+      <DownloadCV />
+      <LanguageSwitch />
+
       {/* Left Side - Text */}
       <motion.div
         className="absolute left-[50%] md:left-[40%] top-[35%] md:top-[50%] -translate-x-1/2 -translate-y-1/2 z-20"

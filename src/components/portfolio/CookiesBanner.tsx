@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const CookieBanner: React.FC = () => {
-  console.log("CookieBanner is rendering"); // Debugging
-
   const { t } = useTranslation();
   const [accepted, setAccepted] = useState(Cookies.get("cookieConsent"));
 
