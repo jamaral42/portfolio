@@ -9,7 +9,7 @@ const LanguageSwitch: React.FC = () => {
   };
 
   return (
-    <div className="relative top-12 left-8 w-min z-50 bg-tiffany-blue rounded-xl opacity-75 hover:opacity-100 flex items-center p-3 text-sm md:text-md gap-2 ">
+    <div className="relative top-8 md:top-16 left-4 md:left-8 w-min z-50 bg-tiffany-blue rounded-xl opacity-75 hover:opacity-100 flex items-center p-3 text-sm md:text-md gap-2 ">
       <button
         onClick={() => changeLanguage("en")}
         className={`transition-colors ${i18n.language === "en" ? "font-bold text-gunmetal" : "text-gunmetal cursor-pointer"}`}

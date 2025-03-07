@@ -27,7 +27,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
       <div>
         {/* Title */}
         <motion.h2
-          className="text-5xl font-bold mb-4 text-gunmetal text-center items-center relative pt-8 transform -translate-x-[50px]"
+          className="text-5xl font-bold mb-4 text-gunmetal text-center items-center relative pt-8 md:transform md:-translate-x-[50px]"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}

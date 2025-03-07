@@ -11,14 +11,14 @@ const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const [timelineHeight, setTimelineHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [totalHeight, setTotalHeight] = useState(timelineHeight + (isMobile ? 2000 : 1750));
+  const [totalHeight, setTotalHeight] = useState(timelineHeight + (isMobile ? 2100 : 1700));
 
   const aboutY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
   const timelineY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
   const skillsY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
   const projectsY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
 
-  const calculateBaseHeight = (width: number) => (width < 768 ? 2000 : 1700);
+  const calculateBaseHeight = (width: number) => (width < 768 ? 2100 : 1700);
 
   useEffect(() => {
     const handleResize = () => {
@@ -47,7 +47,7 @@ const App: React.FC = () => {
             <Hero isMobile={isMobile} />
           </motion.div>
 
-          <motion.div className={`${isMobile ? 'h-[130vh]' : 'h-[100vh]'}`} style={{ y: aboutY }}>
+          <motion.div className={`${isMobile ? 'h-[140vh]' : 'h-[110vh]'}`} style={{ y: aboutY }}>
             <AboutMe isMobile={isMobile} />
           </motion.div>
 
