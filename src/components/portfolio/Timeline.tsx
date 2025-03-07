@@ -18,37 +18,6 @@ type TimelineProps = {
   onHeightChange: Dispatch<SetStateAction<number>>;
 };
 
-const ExpandableText: React.FC<{ text: string }> = ({ text }) => {
-  const textRef = useRef<HTMLParagraphElement>(null);
-  const [isOverflowing, setIsOverflowing] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Expanded if either hovered or clicked
-  const expanded = isExpanded || isHovered;
-
-  useEffect(() => {
-    if (textRef.current) {
-      // When collapsed, measure clientHeight and scrollHeight
-      // Note: When expanded, the element may not be clamped, so measurement may differ.
-      setIsOverflowing(textRef.current.scrollHeight > textRef.current.clientHeight);
-    }
-  }, [text, expanded]);
-
-  return (
-    <p
-      ref={textRef}
-      className={`text-md mt-2 cursor-pointer transition-all ${expanded ? "line-clamp-none" : "line-clamp-2"}`}
-      onClick={() => setIsExpanded((prev) => !prev)}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {text}
-      {isOverflowing && !expanded && <span className="text-tiffany-blue"> ...</span>}
-    </p>
-  );
-};
-
 const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
   const { t } = useTranslation();
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -79,7 +48,6 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
       });
   }, [timelineData, activeFilter, sortOrder]);
 
-  // Update height whenever timeline changes
   useEffect(() => {
     if (timelineRef.current) {
       onHeightChange(timelineRef.current.clientHeight);
@@ -92,7 +60,6 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
         {t("timeline_title")}
       </h2>
 
-      {/* Filter Buttons */}
       <div className="grid grid-cols-2 justify-items-center gap-4 md:flex md:justify-center md:items-center mb-8">
         {[
           { label: t("timeline_relevant"), value: "important", icon: <FaStar /> },
@@ -113,7 +80,6 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
         ))}
       </div>
 
-      {/* Sort Order Toggle */}
       <div className="flex justify-center mb-8">
         <button
           className="px-4 py-2 rounded-full bg-gray-300 text-gray-800 cursor-pointer hover:bg-tiffany-blue hover:text-white flex items-center space-x-2 transition-all gap-2 focus:ring"
@@ -124,31 +90,31 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
         </button>
       </div>
 
-      <div className="relative max-w-4xl mx-auto">
-        {/* Center Line */}
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 bg-tiffany-blue h-[calc(100%-80px)]"></div>
+      {/* Timeline line*/}
+      <div className="relative max-w-4xl mx-auto px-4">
+        <div className="absolute top-0 left-[6%] w-1 bg-tiffany-blue h-[calc(100%-80px)] md:left-1/2 md:transform md:-translate-x-1/2"></div>
 
-        {/* Timeline Items */}
-        <div className="relative px-2 pb-20">
+        <div className="relative pb-20">
           {displayedTimeline.map((item, index) => (
             <motion.div
               key={index}
-              className={`relative flex items-center w-full ${index % 2 === 0 ? "justify-start" : "justify-end"}`}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
+              className={`relative flex items-center w-full py-2 ${
+                index % 2 === 0 ? "justify-center md:justify-end" : "justify-center md:justify-start"
+              }`}
+              initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
+              exit={{ opacity: 0, x: 50 }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
             >
-              {/* Connector Dot (Moved above content box) */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 top-12 w-4 h-4 bg-tiffany-blue rounded-full border-4 border-white shadow-lg"></div>
+              <div className="absolute left-0 w-4 h-4 bg-tiffany-blue rounded-full border-4 border-white shadow-lg md:left-1/2 md:transform md:-translate-x-1/2 top-6"></div>
 
-              {/* Content Box */}
-              <div className="w-[48%] bg-white p-4 rounded-2xl shadow-lg text-gray-800">
+              <div className="w-[90%] bg-white p-3 rounded-2xl shadow-lg text-gray-800 md:w-[48%] md:p-4">
                 <span className="text-tiffany-blue font-semibold">{item.date}</span>
                 <h3 className="text-lg font-bold">{item.title}</h3>
                 <p className="text-sm text-gray-600 mb-2">{item.place}</p>
-                {/* Use ExpandableText for description */}
-                <ExpandableText text={item.description} />
+                <p className="text-md mt-2">{item.description}</p>
+                <p className="text-sm text-gray-500 italic">{item.main_topics}</p>
               </div>
             </motion.div>
           ))}

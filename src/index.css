@@ -1,12 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Orbitron:wght@400;700&family=Audiowide&family=Monoton');
 @import "tailwindcss";
 
 @theme {
-    --color-platinum : #EEEEEE; 
+    --color-platinum: #EEEEEE; 
     --color-tiffany-blue: #00ADB5;  
     --color-charcoal-gray: #393E46;    
-    --color-gunmetal : #222831;
+    --color-gunmetal: #222831;
+
+    /* Font Variables */
     --font-gugi: 'Gugi', cursive;
+    --font-orbitron: 'Orbitron', sans-serif;
+    --font-audiowide: 'Audiowide', sans-serif;
+    --font-monoton: 'Monoton', cursive;
 }
 
 
@@ -48,14 +53,18 @@
     }
 }
 
+
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-  
-  .line-clamp-none {
+
+    display: box;
+    line-clamp: 2;
+    box-orient: vertical;
+}
+
+.line-clamp-none {
     display: block;
-  }
-  
+}

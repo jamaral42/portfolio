@@ -96,10 +96,10 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ duration: 1.2, delay: 0.5 }}
       >
-        <div className="flex flex-col text-5xl md:text-9xl text-center md:text-left font-bold font-[gugi] mb-12">
+        <div className="flex flex-col text-5xl md:text-9xl text-center md:text-left font-bold font-[audiowide] mb-12">
           <h2>{t("hero.first_name")}</h2>
           <h2>{t("hero.last_name")}</h2>
-          <h3 className="text-center text-lg md:text-4xl md:text-left font-bold mt-8 md:mt-4 font-[gugi]">
+          <h3 className="text-center text-lg md:text-4xl md:text-left font-bold mt-8 md:mt-4 font-[audiowide]">
             {t("hero.title")}
           </h3>
         </div>
