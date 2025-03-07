@@ -47,7 +47,7 @@ const App: React.FC = () => {
             <Hero isMobile={isMobile} />
           </motion.div>
 
-          <motion.div className={`${isMobile ? 'h-[150vh]' : 'h-[100vh]'}`} style={{ y: aboutY }}>
+          <motion.div className={`${isMobile ? 'h-[170vh]' : 'h-[100vh]'}`} style={{ y: aboutY }}>
             <AboutMe isMobile={isMobile} />
           </motion.div>
 
