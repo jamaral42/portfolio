@@ -18,7 +18,7 @@ const App: React.FC = () => {
   const skillsY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
   const projectsY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
 
-  const calculateBaseHeight = (width: number) => (width < 768 ? 2100 : 1700);
+  const calculateBaseHeight = (width: number) => (width < 768 ? 2300 : 1700);
 
   useEffect(() => {
     const handleResize = () => {
