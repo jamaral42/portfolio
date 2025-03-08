@@ -107,14 +107,20 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
               viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
             >
-              <div className="absolute left-0 w-4 h-4 bg-tiffany-blue rounded-full border-4 border-white shadow-lg md:left-1/2 md:transform md:-translate-x-1/2 top-6"></div>
+              <div className="absolute left-0 w-4 h-4 bg-tiffany-blue rounded-full border-4 border-white shadow-lg md:left-1/2 md:transform md:-translate-x-1/2 top-8"></div>
 
               <div className="w-[90%] bg-white p-3 rounded-2xl shadow-lg text-gray-800 md:w-[48%] md:p-4">
-                <span className="text-tiffany-blue font-semibold">{item.date}</span>
-                <h3 className="text-lg font-bold">{item.title}</h3>
-                <p className="text-sm text-gray-600 mb-2">{item.place}</p>
-                <p className="text-md mt-2">{item.description}</p>
-                <p className="text-sm text-gray-500 italic">{item.main_topics}</p>
+                <div className="flex justify-between items-center">
+                  <h2 className="text-tiffany-blue font-semibold">{item.date}</h2>
+                  <p className="text-sm text-gunmetal">{item.place}</p>
+                </div>
+          
+                <div className="w-full h-0.5 bg-gunmetal/30"></div>
+                <h3 className="text-lg font-bold text-center">{item.title}</h3>
+                <div className="w-full h-0.5 bg-gunmetal/30"></div>
+
+                <p className="text-md my-2">{item.description}</p>
+                <p className="text-sm text-gunmetal/60 italic">{item.main_topics}</p>
               </div>
             </motion.div>
           ))}

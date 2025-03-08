@@ -26,7 +26,7 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
   const [angle, setAngle] = useState(0);
   const [orbit, setOrbit] = useState(true);
   const orbitRadiusRef = useRef(window.innerWidth > 860 ? 200 : 125);
-  const removeTechY = useRef(window.innerHeight * 0.5);
+  const removeTechY = useRef(window.innerHeight * 0.55);
 
   const orbitingImages = useMemo(() => [
     { src: cssImg, offset: 0 },
@@ -42,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
   
   // Parallax effect transformations
   const textY = useTransform(scrollYProgress, [0, 1], [0, -1200]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 2100]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 2000]);
 
   // Handle screen resize
   const handleResize = useCallback(() => {
