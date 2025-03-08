@@ -16,25 +16,12 @@ type TimelineItem = {
 
 type TimelineProps = {
   onHeightChange: Dispatch<SetStateAction<number>>;
+  isMobile: boolean;
 };
 
-const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
+const Timeline: React.FC<TimelineProps> = ({ onHeightChange, isMobile }) => {
   const { t } = useTranslation();
   const timelineRef = useRef<HTMLDivElement>(null);
-  
-  // Set initial state based on screen size
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkScreenSize(); // Initial check
-    window.addEventListener("resize", checkScreenSize);
-
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []); // Empty dependency array to only run once after mount
 
   const timelineData: TimelineItem[] = useMemo(
     () =>
@@ -75,11 +62,11 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
       </h2>
 
       <div className="grid grid-cols-2 justify-items-center gap-4 md:flex md:justify-center md:items-center mb-8">
-        {[ 
+        {[
           { label: t("timeline_relevant"), value: "important", icon: <FaStar /> },
           { label: t("timeline_education"), value: "study", icon: <FaBook /> },
           { label: t("timeline_work"), value: "work", icon: <FaBriefcase /> },
-          { label: t("timeline_all"), value: "all", icon: <FaGlobe /> }
+          { label: t("timeline_all"), value: "all", icon: <FaGlobe /> },
         ].map(({ label, value, icon }) => (
           <button
             key={value}
@@ -104,6 +91,7 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
         </button>
       </div>
 
+      {/* Timeline line*/}
       <div className="relative max-w-4xl mx-auto px-4">
         <div className="absolute top-0 left-[6%] w-1 bg-tiffany-blue h-[calc(100%-80px)] md:left-1/2 md:transform md:-translate-x-1/2"></div>
 
@@ -112,8 +100,8 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
             <motion.div
               key={index}
               className={`relative flex items-center w-full py-2 
-                ${index % 2 === 0 ? "justify-center md:justify-end" : "justify-center md:justify-start"}`}
-              initial={{ opacity: 0, x: isMobile ? 100 : index % 2 === 0 ? 100 : -100 }}
+              ${ index % 2 === 0 ? "justify-center md:justify-end" : "justify-center md:justify-start" }`}
+              initial={{ opacity: 0,  x: isMobile ? 100 : index % 2 === 0 ? 100 : -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 50 }}
               viewport={{ once: false, amount: 0.2 }}
@@ -126,7 +114,7 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange }) => {
                   <h2 className="text-tiffany-blue font-semibold">{item.date}</h2>
                   <p className="text-sm text-gunmetal">{item.place}</p>
                 </div>
-
+          
                 <div className="w-full h-0.5 bg-gunmetal/30"></div>
                 <h3 className="text-lg font-bold text-center">{item.title}</h3>
                 <div className="w-full h-0.5 bg-gunmetal/30"></div>

@@ -10,20 +10,26 @@ import tailwind from "../../assets/tailwind.png";
 import excel from "../../assets/excel.png";
 import oracle from "../../assets/oracle.png";
 import typeScript from "../../assets/ts.png";
+import figmaImg from "../../assets/figma.png";
+
+type SkillsProps = {
+  isMobile: boolean;
+};
 
 const skills = [
-  { image: html, nameKey: "html", level: 90 },
-  { image: css, nameKey: "css", level: 85 },
-  { image: js, nameKey: "javascript", level: 80 },
-  { image: vite, nameKey: "vite", level: 70 },
-  { image: react, nameKey: "react", level: 85 },
-  { image: tailwind, nameKey: "tailwind", level: 90 },
-  { image: excel, nameKey: "excel", level: 75 },
-  { image: oracle, nameKey: "oracle", level: 65 },
-  { image: typeScript, nameKey: "type script", level: 55 },
+  { image: html, nameKey: "HTML", level: 90 },
+  { image: css, nameKey: "CSS", level: 85 },
+  { image: js, nameKey: "JavaScript", level: 80 },
+  { image: vite, nameKey: "Vite", level: 70 },
+  { image: react, nameKey: "React", level: 85 },
+  { image: tailwind, nameKey: "TailwindCSS", level: 90 },
+  { image: excel, nameKey: "Excel", level: 75 },
+  { image: oracle, nameKey: "Oracle DB", level: 65 },
+  { image: typeScript, nameKey: "TypeScript", level: 55 },
+  { image: figmaImg, nameKey: "Figma", level: 50 },
 ];
 
-const Skills: React.FC = () => {
+const Skills: React.FC<SkillsProps> = ({ isMobile }) => {
   const { t } = useTranslation();
 
   return (
@@ -35,8 +41,8 @@ const Skills: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12  w-full">
             {skills.map((skill, index) => {
               // Randomize initial X and Y values for the icon
-              const randomX = (Math.random() - 0.5) * 500; // Random between -250 and 250
-              const randomY = (Math.random() - 0.5) * 500;
+              const randomX = (Math.random() - 0.5) * (isMobile ? 200 : 500);
+              const randomY = (Math.random() - 0.5) * (isMobile ? 200 : 500);
 
               return (
                 <div

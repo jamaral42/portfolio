@@ -13,6 +13,7 @@ import reactImg from "../../assets/react.png";
 import tailwindImg from "../../assets/tailwind.png";
 import tsImg from "../../assets/ts.png";
 import viteImg from "../../assets/vite.png";
+import figmaImg from "../../assets/figma.png";
 
 interface HeroProps {
   isMobile: boolean;
@@ -30,14 +31,15 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
 
   const orbitingImages = useMemo(() => [
     { src: cssImg, offset: 0 },
-    { src: excelImg, offset: (2 * Math.PI) / 9 },
-    { src: htmlImg, offset: (4 * Math.PI) / 9 },
-    { src: jsImg, offset: (6 * Math.PI) / 9 },
-    { src: oracleImg, offset: (8 * Math.PI) / 9 },
-    { src: reactImg, offset: (10 * Math.PI) / 9 },
-    { src: tailwindImg, offset: (12 * Math.PI) / 9 },
-    { src: tsImg, offset: (14 * Math.PI) / 9 },
-    { src: viteImg, offset: (16 * Math.PI) / 9 },
+    { src: excelImg, offset: (2 * Math.PI) / 10 },
+    { src: htmlImg, offset: (4 * Math.PI) / 10 },
+    { src: jsImg, offset: (6 * Math.PI) / 10 },
+    { src: oracleImg, offset: (8 * Math.PI) / 10 },
+    { src: reactImg, offset: (10 * Math.PI) / 10 },
+    { src: tailwindImg, offset: (12 * Math.PI) / 10 },
+    { src: tsImg, offset: (14 * Math.PI) / 10 },
+    { src: viteImg, offset: (16 * Math.PI) / 10 },
+    { src: figmaImg, offset: (18 * Math.PI) / 10 },
   ], []);
   
   // Parallax effect transformations
