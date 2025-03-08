@@ -223,7 +223,8 @@ const resources = {
       },
       footer: {
         title: "Get in Touch",
-        text: "Developed and Designed by João Amaral",    
+        text: "Developed and Designed by João Amaral",
+        downloadCV: "Download CV",
       },
     },  
   },
@@ -449,6 +450,7 @@ const resources = {
       footer: {
         title: "Entre em Contato",
         text: "Desenvolvido e Desenhado por João Amaral",
+        downloadCV: "Download CV",
       },
     },
   },
