@@ -17,16 +17,16 @@ type SkillsProps = {
 };
 
 const skills = [
-  { image: html, nameKey: "HTML", level: 90 },
-  { image: css, nameKey: "CSS", level: 85 },
-  { image: js, nameKey: "JavaScript", level: 80 },
-  { image: vite, nameKey: "Vite", level: 70 },
+  { image: html, nameKey: "HTML", level: 75 },
+  { image: css, nameKey: "CSS", level: 77 },
+  { image: js, nameKey: "JavaScript", level: 82 },
+  { image: vite, nameKey: "Vite", level: 80 },
   { image: react, nameKey: "React", level: 85 },
-  { image: tailwind, nameKey: "TailwindCSS", level: 90 },
+  { image: tailwind, nameKey: "TailwindCSS", level: 87 },
   { image: excel, nameKey: "Excel", level: 75 },
-  { image: oracle, nameKey: "Oracle DB", level: 65 },
-  { image: typeScript, nameKey: "TypeScript", level: 55 },
-  { image: figmaImg, nameKey: "Figma", level: 50 },
+  { image: oracle, nameKey: "Oracle DB", level: 92 },
+  { image: typeScript, nameKey: "TypeScript", level: 70 },
+  { image: figmaImg, nameKey: "Figma", level: 65 },
 ];
 
 const Skills: React.FC<SkillsProps> = ({ isMobile }) => {

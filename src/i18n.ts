@@ -55,11 +55,11 @@ const resources = {
           },
         },
         details: {
-          1: "I am curious, dedicated, meticulous, and detail-oriented.",
-          2: "Part of my professional experience consists of working with raw data to simplify and enrich it, with the purpose of clearly presenting the data and/or improving systems.",
+          1: "I am curious, dedicated, and detail-oriented.",
+          2: "My professional experience consists of working with raw data to simplify and enrich it, with the purpose of clearly presenting the data and/or improving systems.",
           3: "In this field, I gained good knowledge of technologies like RAID, Oracle SQL, and Excel, as well as tasks involving documentation, presentations, and project planning.",
           4: "I still have a lot of interest in these areas but am exploring less restrictive technologies.",
-          5: "Learned programming in 2011 with C and Java, now focused in web development, fontend-end and back.end.",
+          5: "Learned programming in 2011 with C and Java, now focused in web development, FrontEnd and BackEnd.",
         },
         interest_title: "My Interests",
         interest: {
@@ -81,7 +81,7 @@ const resources = {
           date: "2011-2018",
           place: "Instituto Super de Engenharia de Lisboa",
           title: "Bachelor's Degree in Electronic, Telecommunications and Computer Engineering",
-          description: "Bachelor's degree with the main objective of training engineers capable of responding competently to the challenges posed by the job market in the Information and Communication Technologies sector.sector.",
+          description: "Bachelor's degree with the main objective of training engineers capable of responding to the challenges posed by the job market in the Information and Communication Technologies sector.",
           main_topics: "Telecommunications, Programming in C and Java, Digital Systems Logic, Electronics, Probability, Statistics, Mathematics, Physics, among others.",
           important: true,
           study: true,
@@ -100,8 +100,8 @@ const resources = {
         3: {
           date: "2018-2018",
           place: "ISEL (Radio Communications Course)",
-          title: "Program for Analyzing Microwave Link Between Two Antennas",
-          description: `Graphical interface where the desired microwave link information is entered (transmission power, frequency, antenna data, link distance, terrain type, atmospheric pressure, humidity, among others).
+          title: "Program to analyze hertzian waves between two antennas",
+          description: `Graphical interface where the desired hertzian wave information is entered (transmission power, frequency, antenna data, link distance, terrain type, atmospheric pressure, humidity, among others).
           With this, the link characteristics are calculated (received power, attenuations, gains, angles, divergence, and graphical sketch).`,
           main_topics: `MatLab`,
           important: false,
@@ -122,7 +122,7 @@ const resources = {
           date: "2018-2018",
           place: "WEDO (Mobileum)",
           title: "Implementation of Revenue Assurance Module",
-          description: "Implementation of a Revenue Assurance module for Vodafone Albania. It consists of validating key business rules for determining vendor remuneration to identify inconsistencies.",
+          description: "Implementation of a Revenue Assurance module for Vodafone Albania. It consists of validating key business rules for determining vendor remuneration and to identify inconsistencies.",
           main_topics: `RAID, Oracle Database, SQL / PL-SQL`,
           important: false,
           study: false,
@@ -162,7 +162,7 @@ const resources = {
           date: "2020-2024",
           place: "WEDO (Mobileum)",
           title: "Development of RAID Incentives Broker for NOS",
-          description: "I was part of a small team ranging from 2 to 4 people, developing over 20 projects related to incentives and vendor commissions. From early on, I became the right-hand of the team for project development, and later, I contributed to documentation, deployment, presentations, knowledge transfer to support teams, and some requirement gathering for project development.",
+          description: "I was part of a small team ranging from 2 to 4 people, developing over 20 projects related to incentives and vendor commissions. Early on I adquired a lot of autonomy and responsability in the development, and later on in the documentation, deployment, presentations, knowledge transfer to support teams, and some requirement gathering for project development.",
           main_topics: "RAID, Oracle SQL / PL-SQL, Excel, PowerPoint, Java, Jira, Agile, Scrum",
           important: true,
           study: false,
@@ -205,7 +205,7 @@ const resources = {
       web_projects: {
         project1: {
           title: "Portfolio",
-          description: "This website, a little introduction to myself, my path, and my projects",
+          description: "An introduction to myself, my path, and my projects",
           link: "https://joaomramaral.com/",
         },
         project2: {
@@ -281,11 +281,11 @@ const resources = {
           },
         },
         details: {
-          1: "Curioso, dedicado, meticuloso e atento ao detalhe.",
-          2: "Parte da minha experiência profissional consiste em trabalhar com dados brutos para simplificar e enriquecer-os, com o objetivo de apresentar os dados e/ou melhorar sistemas.",
-          3: "Neste campo, adquiri bons conhecimentos sobre tecnologias como RAID, Oracle SQL e Excel, bem como tarefas envolvendo documentação, apresentações e planeamento de projetos.",
-          4: "Ainda tenho muita interesse nestes campos, mas estou explorando tecnologias menos restritivas.",
-          5: "Aprendi programação em 2011 em C e Java mas estou neste momento focado em web development tanto front-end quanto back-end.",
+          1: "Curioso, dedicado e atento ao detalhe.",
+          2: "Experiência profissional em análise e tratamento de dados com o objetivo de os apresentar e/ou melhorar sistemas.",
+          3: "Nesta área, adquiri bons conhecimentos sobre tecnologias como RAID, Oracle SQL e Excel, bem como tarefas envolvendo documentação, apresentações e planeamento de projetos.",
+          4: "Ainda tenho muita interesse nestes áreas, mas estou a explorar tecnologias menos restritivas.",
+          5: "Aprendi programação em 2011 em C e Java mas estou neste momento focado em web development tanto FrontEnd quanto BackEnd.",
         },
         interest_title: "Interesses",
         interest: {
@@ -388,7 +388,7 @@ const resources = {
           date: "2020-2024",
           place: "WEDO (Mobileum)",
           title: "Desenvolvimento de RAID Incentives Broker para a NOS",
-          description: "Integrei pequena equipa variando de 2 a 4 pessoas para desenvolver mais de 20 projetos relacionados com incentivos e comissões de vendedores. Praticamente desde o inicio que foi o braço direito da equipa para o desenvolvimento dos projetos e mais para o fim da documentação, deployment, apresentação/passagem de informação para o suporte e alguma levantação de requerimentos para o desenvolvimento dos projetos.", 
+          description: "Integrei pequena equipa variando de 2 a 4 pessoas para desenvolver mais de 20 projetos relacionados com incentivos e comissões de vendedores. Desde o inicio que obti bastante autonomi e responsabiliade no desenvolvimento dos projetos e mais tarde na documentação, deployment, apresentação/passagem de informação para o suporte e alguma levantação de requerimentos para o desenvolvimento dos projetos.", 
           main_topics: "RAID, Oracle SQL / PL-SQL, Excel, Powerpoint, Java, Jira, Agile, Scrum ",
           important: true,
           study: false,
@@ -431,7 +431,7 @@ const resources = {
       web_projects: {
         project1: {
           title: "Portfólio",
-          description: "Este site é uma pequena introdução sobre mim, o meu percurso e os meus projetos",
+          description: "Introdução sobre mim, o meu percurso e os meus projetos",
           link: "https://joaomramaral.com/",
         },
         project2: {
