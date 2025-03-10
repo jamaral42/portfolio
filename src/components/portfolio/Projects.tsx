@@ -7,26 +7,26 @@ import "slick-carousel/slick/slick-theme.css";
 
 import peartreeImage from "../../assets/peartree.jpg";
 import milandoneImage from "../../assets/milandone.jpg";
-import standardImage from "../../assets/portfolio.jpg";
+import portfolioImage from "../../assets/portfolio.jpg";
 import { motion } from "framer-motion";
 
 const projects = [
   {
     titleKey: "web_projects.project1.title",
     descriptionKey: "web_projects.project1.description",
-    image: peartreeImage,
+    image: portfolioImage,
     link: "https://peartreehandcraft.pt/",
   },
   {
     titleKey: "web_projects.project2.title",
     descriptionKey: "web_projects.project2.description",
-    image: milandoneImage,
+    image: peartreeImage,
     link: "https://www.miland1food.com/",
   },
   {
     titleKey: "web_projects.project3.title",
     descriptionKey: "web_projects.project3.description",
-    image: standardImage,
+    image: milandoneImage,
     link: "https://joaomramaral.com//",
   },
 ];
