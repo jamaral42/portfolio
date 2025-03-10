@@ -36,13 +36,13 @@ const Skills: React.FC<SkillsProps> = ({ isMobile }) => {
     <section>
       <div className="relative bg-gunmetal text-platinum p-12">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
-          <h1 className="text-3xl font-bold my-10 text-mahogany">{t("skill_title")}</h1>
+          <h1 className="text-3xl md:text-5xl font-[audiowide] font-bold my-10 text-mahogany">{t("skill_title")}</h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12  w-full">
             {skills.map((skill, index) => {
               // Randomize initial X and Y values for the icon
-              const randomX = (Math.random() - 0.5) * (isMobile ? 200 : 500);
-              const randomY = (Math.random() - 0.5) * (isMobile ? 200 : 500);
+              const randomX = (Math.random() - 0.5) * (isMobile ? 150 : 300);
+              const randomY = (Math.random() - 0.5) * (isMobile ? 150 : 300);
 
               return (
                 <div

@@ -82,7 +82,7 @@ const Projects: React.FC = () => {
 
   return (
     <div className="relative bg-platinum pt-16 pb-20">
-      <h1 className="text-3xl font-bold mb-6 text-center text-mahogany">
+      <h1 className="text-3xl md:text-5xl font-[audiowide] font-bold mb-6 text-center text-mahogany">
         {t("web_projects_title")}
       </h1>
 
@@ -98,20 +98,18 @@ const Projects: React.FC = () => {
                 className="bg-gunmetal rounded-xl flex flex-col items-center overflow-hidden cursor-pointer"
                 href={project.link}
               >
+                <h2 className="text-platinum text-md md:text-xl font-semibold mb-2">
+                  {t(project.titleKey)}
+                </h2>
                 <img
                   src={project.image}
                   alt={t(project.titleKey)}
-                  className="w-full h-40 md:h-60 object-cover mb-4 rounded-t-xl"
+                  className="w-full h-40 md:h-60 object-cover mb-2 md:mb-4 px-1"
                   loading="lazy"
                 />
-                <div className="text-center h-20 md:h-32">
-                  <h2 className="text-platinum text-md md:text-xl font-semibold mb-2">
-                    {t(project.titleKey)}
-                  </h2>
-                  <p className="text-platinum text-xs md:text-sm mb-4">
-                    {t(project.descriptionKey)}
-                  </p>
-                </div>
+                <p className="text-platinum text-xs md:text-sm mb-2 md:mb-4 h-32 px-2">
+                  {t(project.descriptionKey)}
+                </p>
               </a>
             </motion.div>
           ))}

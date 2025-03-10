@@ -57,7 +57,7 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange, isMobile }) => {
 
   return (
     <section ref={timelineRef}>
-      <h2 className="text-2xl font-bold text-center text-gunmetal mt-20 mb-10">
+      <h2 className="text-3xl md:text-5xl font-[audiowide] font-bold text-center text-gunmetal mt-20 mb-10">
         {t("timeline_title")}
       </h2>
 
@@ -70,7 +70,7 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange, isMobile }) => {
         ].map(({ label, value, icon }) => (
           <button
             key={value}
-            className={`flex items-center justify-center space-x-2 px-4 py-2 w-30 rounded-full transition-all focus:ring cursor-pointer hover:bg-tiffany-blue hover:text-white ${
+            className={`flex items-center justify-center space-x-2 px-4 py-2 w-40 md:w-50 rounded-full transition-all focus:ring cursor-pointer hover:bg-tiffany-blue hover:text-white ${
               activeFilter === value ? "bg-tiffany-blue text-white" : "bg-gray-300 text-gray-800"
             }`}
             onClick={() => setActiveFilter(value)}
@@ -83,7 +83,7 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange, isMobile }) => {
 
       <div className="flex justify-center mb-8">
         <button
-          className="px-4 py-2 rounded-full bg-gray-300 text-gray-800 cursor-pointer hover:bg-tiffany-blue hover:text-white flex items-center space-x-2 transition-all gap-2 focus:ring"
+          className="px-4 py-2 w-40 md:w-50 rounded-full bg-gray-300 text-gray-800 cursor-pointer hover:bg-tiffany-blue hover:text-white flex items-center justify-center space-x-2 transition-all gap-2 focus:ring"
           onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
         >
           {sortOrder === "asc" ? t("timeline_oldest") : t("timeline_newest")}
@@ -116,7 +116,7 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange, isMobile }) => {
                 </div>
           
                 <div className="w-full h-0.5 bg-gunmetal/30"></div>
-                <h3 className="text-lg font-bold text-center">{item.title}</h3>
+                <h3 className="text-lg  font-bold text-center">{item.title}</h3>
                 <div className="w-full h-0.5 bg-gunmetal/30"></div>
 
                 <p className="text-md my-2">{item.description}</p>

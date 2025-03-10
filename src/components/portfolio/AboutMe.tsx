@@ -27,7 +27,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
       <div>
         {/* Title */}
         <motion.h2
-          className="text-5xl font-bold mb-4 text-gunmetal text-center items-center relative pt-8 md:transform md:-translate-x-[50px]"
+          className="text-3xl md:text-5xl font-[audiowide] font-bold mb-4 text-gunmetal text-center items-center relative pt-8 md:transform md:-translate-x-[50px]"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,14 +63,14 @@ const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
           
         {/* Interests */}
         <div className="flex flex-col items-center justify-center py-8 md:py-0 md:gap-10">
-          <p className="text-white text-center text-4xl font-semibold mb-4">{t("about_me.interest_title")}</p>
-          <div className="grid grid-cols-4 md:grid-cols-2 gap-4 md:gap-8 px-4 md:px-0">
+          <p className="text-3xl md:text-4xl font-[audiowide] text-white text-center font-semibold mb-4">{t("about_me.interest_title")}</p>
+          <div className="grid grid-cols-4 md:grid-cols-2 gap-6 md:gap-8 px-4 md:px-0">
             {interests.map((interest, index) => (
               <div key={index} className="flex flex-col items-center text-platinum">
                 <div className="flex items-center justify-center">
                   {interest.icon}
                 </div>
-                <span className="text-xl mt-1">{t(interest.labelKey)}</span>
+                <span className="text-lg md:text-xl mt-1">{t(interest.labelKey)}</span>
               </div>
             ))}
           </div>
