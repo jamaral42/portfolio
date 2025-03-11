@@ -9,60 +9,63 @@ const Projects = lazy(() => import("../components/portfolio/Projects"));
 
 const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
+  const [heroHeight, setHeroHeight] = useState(0);
+  const [aboutHeight, setAboutHeight] = useState(0);
   const [timelineHeight, setTimelineHeight] = useState(0);
+  const [skillsHeight, setSkillsHeight] = useState(0);
+  const [projectsHeight, setProjectsHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [totalHeight, setTotalHeight] = useState(timelineHeight + (isMobile ? 2500 : 1800));
-
-  const aboutY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
-  const timelineY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
-  const skillsY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
-  const projectsY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
 
   const calculateBaseHeight = (width: number) => (width < 768 ? 2500 : 1800);
 
+  const [totalHeight, setTotalHeight] = useState(
+    calculateBaseHeight(window.innerWidth)
+  );
+
+  const sectionY = useTransform(scrollYProgress, [0, 1], [0, -1670]);
+
   useEffect(() => {
     const handleResize = () => {
-      const newIsMobile = window.innerWidth < 768;
-      setIsMobile(newIsMobile);
-      setTotalHeight(calculateBaseHeight(window.innerWidth) + timelineHeight);
+      setIsMobile(window.innerWidth < 768);
+      setTotalHeight(
+        heroHeight + aboutHeight + timelineHeight + skillsHeight + projectsHeight - 1600
+      );
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [timelineHeight]); // Recalculate on timeline change
+  }, [heroHeight, aboutHeight, timelineHeight, skillsHeight, projectsHeight]);
 
   useEffect(() => {
-    setTotalHeight(calculateBaseHeight(window.innerWidth) + timelineHeight);
-  }, [timelineHeight, isMobile]);
+    setTotalHeight(
+      heroHeight + aboutHeight + timelineHeight + skillsHeight + projectsHeight - 1600
+    );
+  }, [heroHeight, aboutHeight, timelineHeight, skillsHeight, projectsHeight, isMobile]);
 
   return (
     <motion.div className="relative overflow-hidden">
+      {/* Outer div dynamically resizes based on totalHeight */}
+      <div className="bg-platinum transition-all duration-300" style={{ height: `${totalHeight}px` }}>
+        <motion.div className="sticky top-0" style={{ height: heroHeight }}>
+          <Hero onHeightChange={setHeroHeight} isMobile={isMobile} />
+        </motion.div>
 
-        {/* Outer div now dynamically resizes based on totalHeight */}
-        <div
-          className="bg-platinum transition-all duration-300"
-          style={{ height: `${totalHeight}px` }}
-        >
-          <motion.div className="sticky top-0 h-[100vh]">
-            <Hero isMobile={isMobile} />
-          </motion.div>
+        <motion.div style={{ y: sectionY, height: aboutHeight }}>
+          <AboutMe onHeightChange={setAboutHeight} isMobile={isMobile} />
+        </motion.div>
 
-          <motion.div className={`${isMobile ? 'h-[170vh]' : 'h-[100vh]'}`} style={{ y: aboutY }}>
-            <AboutMe isMobile={isMobile} />
-          </motion.div>
+        <motion.div style={{ y: sectionY, minHeight: timelineHeight }}>
+          <Timeline onHeightChange={setTimelineHeight} isMobile={isMobile} />
+        </motion.div>
 
-          <motion.div style={{ y: timelineY, minHeight: timelineHeight }}>
-            <Timeline onHeightChange={setTimelineHeight} isMobile={isMobile} />
-          </motion.div>
+        <motion.div style={{ y: sectionY, height: skillsHeight }}>
+          <Skills onHeightChange={setSkillsHeight} isMobile={isMobile} />
+        </motion.div>
 
-          <motion.div style={{ y: skillsY }}>
-            <Skills isMobile={isMobile} />
-          </motion.div>
-
-          <motion.div style={{ y: projectsY }}>
-            <Projects />
-          </motion.div>
-        </div>
+        <motion.div style={{ y: sectionY, height: projectsHeight }}>
+          <Projects onHeightChange={setProjectsHeight} />
+        </motion.div>
+      </div>
     </motion.div>
   );
 };

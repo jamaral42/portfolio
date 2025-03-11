@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { FaMusic, FaUtensils, FaFootballBall, FaPuzzlePiece } from "react-icons/fa";
-
 
 const interests = [
   { icon: <FaMusic className="w-20 text-4xl p-2" />, labelKey: "about_me.interest.music" },
@@ -13,17 +12,34 @@ const interests = [
 
 interface AboutMeProps {
   isMobile: boolean;
+  onHeightChange: (height: number) => void;
 }
 
-const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
+const AboutMe: React.FC<AboutMeProps> = ({ isMobile, onHeightChange }) => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLElement>(null);
 
-  // Extract structured content
-  const aboutContent = t("about_me.content", { returnObjects: true }) as Record<string, { title: string; content: string }>;
+  // Measure and report component height to the parent
+  useEffect(() => {
+    const measureHeight = () => {
+      if (containerRef.current) {
+        onHeightChange(containerRef.current.offsetHeight);
+      }
+    };
+    measureHeight();
+    window.addEventListener("resize", measureHeight);
+    return () => window.removeEventListener("resize", measureHeight);
+  }, [onHeightChange, isMobile]);
+
+  // Extract structured content from translations
+  const aboutContent = t("about_me.content", { returnObjects: true }) as Record<
+    string,
+    { title: string; content: string }
+  >;
   const aboutDetails = t("about_me.details", { returnObjects: true }) as Record<string, string>;
 
   return (
-    <section>
+    <section ref={containerRef}>
       <div>
         {/* Title */}
         <motion.h2
@@ -45,7 +61,10 @@ const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
                 key={index}
                 className="p-4 rounded-3xl shadow-lg flexCenter gap-2 md:gap-4 items-center bg-gunmetal w-80 md:w-auto"
                 initial={{ opacity: 0, x: index % 2 === 0 ? 100 : -100 }}
-                whileInView={ { opacity: 1, x: isMobile ?  0 : index === 2 ? -25 : index % 2 === 0 ? 125 : 25 } }
+                whileInView={{
+                  opacity: 1,
+                  x: isMobile ? 0 : index === 2 ? -25 : index % 2 === 0 ? 125 : 25,
+                }}
                 exit={{ opacity: 0, x: 50 }}
                 viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 0.5 }}
@@ -57,19 +76,18 @@ const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
           </div>
         </div>
       </div>
-      
+
       {/* Interest Section */}
-      <div className="bg-gunmetal text-platinum flex flex-col-reverse md:grid md:grid-cols-2" >
-          
+      <div className="bg-gunmetal text-platinum flex flex-col-reverse md:grid md:grid-cols-2">
         {/* Interests */}
         <div className="flex flex-col items-center justify-center py-8 md:py-0 md:gap-10">
-          <p className="text-3xl md:text-4xl font-[audiowide] text-white text-center font-semibold mb-4">{t("about_me.interest_title")}</p>
+          <p className="text-3xl md:text-4xl font-[audiowide] text-white text-center font-semibold mb-4">
+            {t("about_me.interest_title")}
+          </p>
           <div className="grid grid-cols-4 md:grid-cols-2 gap-6 md:gap-8 px-4 md:px-0">
             {interests.map((interest, index) => (
               <div key={index} className="flex flex-col items-center text-platinum">
-                <div className="flex items-center justify-center">
-                  {interest.icon}
-                </div>
+                <div className="flex items-center justify-center">{interest.icon}</div>
                 <span className="text-lg md:text-xl mt-1">{t(interest.labelKey)}</span>
               </div>
             ))}
@@ -85,7 +103,10 @@ const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
                 key={key}
                 className="p-4 rounded-3xl shadow-lg flexCenter gap-4 items-center bg-platinum text-gunmetal w-80 md:w-auto"
                 initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
-                whileInView={ { opacity: 1, x: isMobile ?  0 : index === 2 ? 150 : index % 2 === 0 ? 0 : 75 } }
+                whileInView={{
+                  opacity: 1,
+                  x: isMobile ? 0 : index === 2 ? 150 : index % 2 === 0 ? 0 : 75,
+                }}
                 exit={{ opacity: 0, x: 50 }}
                 viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 0.5 }}
@@ -95,7 +116,6 @@ const AboutMe: React.FC<AboutMeProps> = ({ isMobile }) => {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

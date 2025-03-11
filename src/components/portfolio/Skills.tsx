@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import html from "../../assets/html.png";
@@ -14,6 +14,7 @@ import figmaImg from "../../assets/figma.png";
 
 type SkillsProps = {
   isMobile: boolean;
+  onHeightChange: (height: number) => void;
 };
 
 const skills = [
@@ -29,16 +30,31 @@ const skills = [
   { image: figmaImg, nameKey: "Figma", level: 65 },
 ];
 
-const Skills: React.FC<SkillsProps> = ({ isMobile }) => {
+const Skills: React.FC<SkillsProps> = ({ isMobile, onHeightChange }) => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Measure and report the component height to the parent
+  useEffect(() => {
+    const measureHeight = () => {
+      if (containerRef.current) {
+        onHeightChange(containerRef.current.offsetHeight);
+      }
+    };
+    measureHeight();
+    window.addEventListener("resize", measureHeight);
+    return () => window.removeEventListener("resize", measureHeight);
+  }, [onHeightChange, isMobile]);
 
   return (
-    <section>
+    <section ref={containerRef}>
       <div className="relative bg-gunmetal text-platinum p-12">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
-          <h1 className="text-3xl md:text-5xl font-[audiowide] font-bold my-10 text-mahogany">{t("skill_title")}</h1>
+          <h1 className="text-3xl md:text-5xl font-[audiowide] font-bold my-10 text-mahogany">
+            {t("skill_title")}
+          </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12  w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 w-full">
             {skills.map((skill, index) => {
               // Randomize initial X and Y values for the icon
               const randomX = (Math.random() - 0.5) * (isMobile ? 150 : 300);
@@ -67,7 +83,6 @@ const Skills: React.FC<SkillsProps> = ({ isMobile }) => {
                   {/* Name & Progress Bar */}
                   <div className="w-full">
                     <p className="text-lg font-semibold">{skill.nameKey}</p>
-
                     <div className="w-full bg-gray-300 rounded-full h-2 mt-1">
                       <motion.div
                         className="bg-tiffany-blue h-2 rounded-full"
@@ -78,12 +93,10 @@ const Skills: React.FC<SkillsProps> = ({ isMobile }) => {
                       />
                     </div>
                   </div>
-
                 </div>
               );
             })}
           </div>
-
         </div>
       </div>
     </section>

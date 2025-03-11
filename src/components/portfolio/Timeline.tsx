@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef, Dispatch, SetStateAction } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { FaStar, FaBook, FaBriefcase, FaGlobe, FaArrowDown, FaArrowUp } from "react-icons/fa";
@@ -15,7 +15,7 @@ type TimelineItem = {
 };
 
 type TimelineProps = {
-  onHeightChange: Dispatch<SetStateAction<number>>;
+  onHeightChange: (height: number) => void;
   isMobile: boolean;
 };
 
@@ -49,10 +49,16 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange, isMobile }) => {
       });
   }, [timelineData, activeFilter, sortOrder]);
 
+  // Measure and report timeline height
   useEffect(() => {
-    if (timelineRef.current) {
-      onHeightChange(timelineRef.current.clientHeight);
-    }
+    const measureHeight = () => {
+      if (timelineRef.current) {
+        onHeightChange(timelineRef.current.clientHeight);
+      }
+    };
+    measureHeight();
+    window.addEventListener("resize", measureHeight);
+    return () => window.removeEventListener("resize", measureHeight);
   }, [displayedTimeline, onHeightChange]);
 
   return (
@@ -91,7 +97,7 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange, isMobile }) => {
         </button>
       </div>
 
-      {/* Timeline line*/}
+      {/* Timeline line */}
       <div className="relative max-w-4xl mx-auto px-4">
         <div className="absolute top-0 left-[6%] w-1 bg-tiffany-blue h-[calc(100%-80px)] md:left-1/2 md:transform md:-translate-x-1/2"></div>
 
@@ -99,9 +105,10 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange, isMobile }) => {
           {displayedTimeline.map((item, index) => (
             <motion.div
               key={index}
-              className={`relative flex items-center w-full py-2 
-              ${ index % 2 === 0 ? "justify-center md:justify-end" : "justify-center md:justify-start" }`}
-              initial={{ opacity: 0,  x: isMobile ? 100 : index % 2 === 0 ? 100 : -100 }}
+              className={`relative flex items-center w-full py-2 ${
+                index % 2 === 0 ? "justify-center md:justify-end" : "justify-center md:justify-start"
+              }`}
+              initial={{ opacity: 0, x: isMobile ? 100 : index % 2 === 0 ? 100 : -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 50 }}
               viewport={{ once: false, amount: 0.2 }}
@@ -114,9 +121,9 @@ const Timeline: React.FC<TimelineProps> = ({ onHeightChange, isMobile }) => {
                   <h2 className="text-tiffany-blue font-semibold">{item.date}</h2>
                   <p className="text-sm text-gunmetal">{item.place}</p>
                 </div>
-          
+
                 <div className="w-full h-0.5 bg-gunmetal/30"></div>
-                <h3 className="text-lg  font-bold text-center">{item.title}</h3>
+                <h3 className="text-lg font-bold text-center">{item.title}</h3>
                 <div className="w-full h-0.5 bg-gunmetal/30"></div>
 
                 <p className="text-md my-2">{item.description}</p>

@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { AnimatePresence, motion,  useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import LanguageSwitch from './LanguageSwitcher'; 
-import DownloadCV from './DownloadCV';
+import LanguageSwitch from "./LanguageSwitcher"; 
+import DownloadCV from "./DownloadCV";
 import photo from "../../assets/photo.jpg";
 import cssImg from "../../assets/css.png";
 import excelImg from "../../assets/excel.png";
@@ -16,12 +16,13 @@ import viteImg from "../../assets/vite.png";
 import figmaImg from "../../assets/figma.png";
 
 interface HeroProps {
+  onHeightChange: (height: number) => void;
   isMobile: boolean;
 }
 
 const SPEED = 0.002;
 
-const Hero: React.FC<HeroProps> = ({ isMobile }) => {
+const Hero: React.FC<HeroProps> = ({ onHeightChange, isMobile }) => {
   const { t } = useTranslation();
   const { scrollYProgress } = useScroll();
   const [angle, setAngle] = useState(0);
@@ -29,19 +30,39 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
   const orbitRadiusRef = useRef(window.innerWidth > 860 ? 200 : 125);
   const removeTechY = useRef(window.innerHeight * 0.55);
 
-  const orbitingImages = useMemo(() => [
-    { src: cssImg, offset: 0 },
-    { src: excelImg, offset: (2 * Math.PI) / 10 },
-    { src: htmlImg, offset: (4 * Math.PI) / 10 },
-    { src: jsImg, offset: (6 * Math.PI) / 10 },
-    { src: oracleImg, offset: (8 * Math.PI) / 10 },
-    { src: reactImg, offset: (10 * Math.PI) / 10 },
-    { src: tailwindImg, offset: (12 * Math.PI) / 10 },
-    { src: tsImg, offset: (14 * Math.PI) / 10 },
-    { src: viteImg, offset: (16 * Math.PI) / 10 },
-    { src: figmaImg, offset: (18 * Math.PI) / 10 },
-  ], []);
-  
+  // Ref to measure the container height
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Report the height of the Hero component to the parent
+  useEffect(() => {
+    const measureHeight = () => {
+      if (containerRef.current) {
+        onHeightChange(containerRef.current.offsetHeight);
+      }
+    };
+    measureHeight();
+    window.addEventListener("resize", measureHeight);
+    return () => {
+      window.removeEventListener("resize", measureHeight);
+    };
+  }, [onHeightChange, isMobile]);
+
+  const orbitingImages = useMemo(
+    () => [
+      { src: cssImg, offset: 0 },
+      { src: excelImg, offset: (2 * Math.PI) / 10 },
+      { src: htmlImg, offset: (4 * Math.PI) / 10 },
+      { src: jsImg, offset: (6 * Math.PI) / 10 },
+      { src: oracleImg, offset: (8 * Math.PI) / 10 },
+      { src: reactImg, offset: (10 * Math.PI) / 10 },
+      { src: tailwindImg, offset: (12 * Math.PI) / 10 },
+      { src: tsImg, offset: (14 * Math.PI) / 10 },
+      { src: viteImg, offset: (16 * Math.PI) / 10 },
+      { src: figmaImg, offset: (18 * Math.PI) / 10 },
+    ],
+    []
+  );
+
   // Parallax effect transformations
   const textY = useTransform(scrollYProgress, [0, 1], [0, -1200]);
   const imageY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 2000]);
@@ -70,8 +91,7 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleResize, handleScroll]);
-																	
-		 
+
   useEffect(() => {
     let animationId: number;
     if (orbit) {
@@ -83,10 +103,9 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
     }
     return () => cancelAnimationFrame(animationId);
   }, [orbit]);
-  
 
   return (
-    <section>
+    <section className="h-screen" ref={containerRef}>
       <DownloadCV />
       <LanguageSwitch />
 
@@ -105,7 +124,6 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
             {t("hero.title")}
           </h3>
         </div>
-
       </motion.div>
 
       {/* Right Side - Image */}
@@ -117,9 +135,13 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
-            transition={ {initial: { delay: 0.5, duration: 1 }, exit: { duration: 0.2, delay: 0 } }}
+            transition={{ initial: { delay: 0.5, duration: 1 }, exit: { duration: 0.2, delay: 0 } }}
           >
-              <img src={photo} alt={t("hero_photo_alt")} className="size-[200px] md:size-[400px] rounded-full" />
+            <img
+              src={photo}
+              alt={t("hero_photo_alt")}
+              className="size-[200px] md:size-[400px] rounded-full"
+            />
           </motion.div>
         )}
       </AnimatePresence>
@@ -134,7 +156,7 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, delay: 0.3 }}
           >
-            <div className="relative flex items-center justify-center ">
+            <div className="relative flex items-center justify-center">
               <div className="absolute size-[200px] flex items-center justify-center z-0">
                 {orbitingImages.map(({ src, offset }, index) => {
                   const x = Math.cos(angle + offset) * orbitRadiusRef.current;
@@ -146,9 +168,9 @@ const Hero: React.FC<HeroProps> = ({ isMobile }) => {
                       alt={`Orbiting ${index}`}
                       className="absolute size-8 md:size-15 object-cover rounded-full overflow-hidden"
                       style={{ x, y }}
-                      initial={{ x: Math.random() * 500, y: Math.random() * 400 , opacity: 0 }}
+                      initial={{ x: Math.random() * 500, y: Math.random() * 400, opacity: 0 }}
                       animate={{ x, y, opacity: 1 }}
-                      exit={{ x: Math.random() * 500 , y: Math.random() * 400 , opacity: 0 }}
+                      exit={{ x: Math.random() * 500, y: Math.random() * 400, opacity: 0 }}
                       transition={{ duration: 1.5 }}
                     />
                   );

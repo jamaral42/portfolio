@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Slider from "react-slick";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import peartreeImage from "../../assets/peartree.jpg";
 import milandoneImage from "../../assets/milandone.jpg";
 import portfolioImage from "../../assets/portfolio.jpg";
 import { motion } from "framer-motion";
+
+type ProjectsProps = {
+  onHeightChange: (height: number) => void;
+};
 
 const projects = [
   {
@@ -50,8 +53,21 @@ const CustomNextArrow = ({ onClick }: { onClick?: () => void }) => (
   </button>
 );
 
-const Projects: React.FC = () => {
+const Projects: React.FC<ProjectsProps> = ({ onHeightChange }) => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Measure and report the component height to the parent
+  useEffect(() => {
+    const measureHeight = () => {
+      if (containerRef.current) {
+        onHeightChange(containerRef.current.offsetHeight);
+      }
+    };
+    measureHeight();
+    window.addEventListener("resize", measureHeight);
+    return () => window.removeEventListener("resize", measureHeight);
+  }, [onHeightChange]);
 
   const settings = {
     dots: true,
@@ -81,11 +97,10 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <div className="relative bg-platinum pt-16 pb-20">
+    <div ref={containerRef} className="relative bg-platinum pt-16 pb-20">
       <h1 className="text-3xl md:text-5xl font-[audiowide] font-bold mb-6 text-center text-mahogany">
         {t("web_projects_title")}
       </h1>
-
       <div className="relative md:px-4">
         <Slider {...settings}>
           {projects.map((project) => (
@@ -94,7 +109,7 @@ const Projects: React.FC = () => {
               className="p-2 md:p-4 relative z-10"
               whileHover={{ scale: 1.05 }}
             >
-              <a 
+              <a
                 className="bg-gunmetal rounded-xl flex flex-col items-center overflow-hidden cursor-pointer"
                 href={project.link}
               >
