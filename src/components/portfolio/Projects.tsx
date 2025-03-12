@@ -39,8 +39,9 @@ const CustomPrevArrow = ({ onClick }: { onClick?: () => void }) => (
   <button
     className="absolute bottom-[-30px] left-[10%] md:left-[44%] text-gunmetal text-3xl z-20 transition cursor-pointer hover:scale-110"
     onClick={onClick}
+    aria-label="Anterior"
   >
-    <HiOutlineChevronLeft />
+    <HiOutlineChevronLeft focusable="false"/>
   </button>
 );
 
@@ -48,8 +49,9 @@ const CustomNextArrow = ({ onClick }: { onClick?: () => void }) => (
   <button
     className="absolute bottom-[-30px] right-[10%] md:right-[44%] text-gunmetal text-3xl z-20 transition cursor-pointer hover:scale-110"
     onClick={onClick}
+    aria-label="Próximo"
   >
-    <HiOutlineChevronRight />
+    <HiOutlineChevronRight focusable="false"/>
   </button>
 );
 

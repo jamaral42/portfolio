@@ -23,6 +23,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="text-mahogany hover:text-highlight transition-transform transform hover:scale-110"
+            aria-label="LinkedIn de João Amaral"
           >
             <FaLinkedin className="text-2xl" />
           </a>
@@ -31,6 +32,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="text-mahogany hover:text-highlight transition-transform transform hover:scale-110"
+            aria-label="GitHub de João Amaral"
           >
             <FaGithub className="text-2xl" />
           </a>
