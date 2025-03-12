@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
 import { useTranslation } from "react-i18next";
 import LanguageSwitch from "./LanguageSwitcher"; 
 import DownloadCV from "./DownloadCV";
-import photo from "../../assets/photo.jpg";
+import photo from "../../assets/photo.webp";
 import cssImg from "../../assets/css.png";
 import excelImg from "../../assets/excel.png";
 import htmlImg from "../../assets/html.png";
