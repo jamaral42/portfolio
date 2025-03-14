@@ -1,83 +1,119 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-const API_KEY = process.env.REACT_APP_FINNHUB_API_KEY;
-const BASE_URL = "https://finnhub.io/api/v1";
-
-interface Stock {
-  symbol: string;
-  amount: number;
-}
-
-interface Prices {
-  [key: string]: number;
-}
-
-interface NewsArticle {
-  headline: string;
-  url: string;
-}
 
 const StockTracker: React.FC = () => {
-  const [stocks, setStocks] = useState<Stock[]>([
-    { symbol: "AAPL", amount: 10 },
-    { symbol: "GOOGL", amount: 5 },
-  ]);
-  const [prices, setPrices] = useState<Prices>({});
-  const [news, setNews] = useState<NewsArticle[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  // Check if user is already logged in
   useEffect(() => {
-    const fetchStockPrices = async () => {
-      const newPrices: Prices = {};
-      for (const stock of stocks) {
-        try {
-          const response = await axios.get(
-            `${BASE_URL}/quote?symbol=${stock.symbol}&token=${API_KEY}`
-          );
-          newPrices[stock.symbol] = response.data.c;
-        } catch (error) {
-          console.error("Error fetching stock data:", error);
-        }
-      }
-      setPrices(newPrices);
-      setStocks(stocks);
-    };
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
-    const fetchStockNews = async () => {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/news?category=general&token=${API_KEY}`
-        );
-        setNews(response.data.slice(0, 5)); // Get the latest 5 news articles
-      } catch (error) {
-        console.error("Error fetching stock news:", error);
-      }
-    };
+  // Handle Signup
+  const handleSignup = () => {
+    if (!email || !password) {
+      alert("Please enter email and password.");
+      return;
+    }
+    localStorage.setItem("user", JSON.stringify({ email, password }));
+    alert("Signup successful! Please log in.");
+    setIsSignup(false);
+  };
 
-    fetchStockPrices();
-    fetchStockNews();
-  }, [stocks]);
+  // Handle Login
+  const handleLogin = () => {
+    const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+    if (storedUser.email === email && storedUser.password === password) {
+      localStorage.setItem("token", "mock-jwt-token");
+      setIsLoggedIn(true);
+      setShowModal(false);
+    } else {
+      alert("Invalid credentials. Please try again.");
+    }
+  };
+
+  // Handle Logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Stock Tracker</h1>
-      <ul>
-        {stocks.map((stock) => (
-          <li key={stock.symbol} className="mb-2">
-            {stock.symbol}: {prices[stock.symbol] ? `$${prices[stock.symbol]}` : "Loading..."} ({stock.amount} shares)
-          </li>
-        ))}
-      </ul>
-      <h2 className="text-xl font-bold mt-6">Latest News</h2>
-      <ul>
-        {news.map((article, index) => (
-          <li key={index} className="mt-2">
-            <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-blue-500">
-              {article.headline}
-            </a>
-          </li>
-        ))}
-      </ul>
+    <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
+      {/* Log In Button (Appears when not logged in) */}
+      {!isLoggedIn && (
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+          onClick={() => setShowModal(true)}
+        >
+          Log In
+        </button>
+      )}
+
+      {/* Modal for Login/Signup */}
+      {showModal && (
+        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-80 relative">
+            {/* Close button (top-right) */}
+            <button 
+              className="absolute top-2 right-2 text-gray-600 hover:text-black"
+              onClick={() => setShowModal(false)}
+            >
+              ❌
+            </button>
+
+            <h2 className="text-xl font-bold mb-4">{isSignup ? "Sign Up" : "Log In"}</h2>
+
+            <input 
+              type="email" 
+              placeholder="Email" 
+              className="w-full p-2 mb-2 border rounded" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+            />
+            <input 
+              type="password" 
+              placeholder="Password" 
+              className="w-full p-2 mb-4 border rounded" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+            />
+
+            <button 
+              className="w-full bg-blue-500 text-white px-4 py-2 rounded mb-2"
+              onClick={isSignup ? handleSignup : handleLogin}
+            >
+              {isSignup ? "Sign Up" : "Log In"}
+            </button>
+
+            <p className="text-sm text-center cursor-pointer text-blue-600" onClick={() => setIsSignup(!isSignup)}>
+              {isSignup ? "Already have an account? Log In" : "Don't have an account? Sign Up"}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Stock Tracker Content (Hidden until login) */}
+      {isLoggedIn ? (
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-4">Stock Tracker</h1>
+          <p>Welcome to your stock tracking dashboard.</p>
+          <button 
+            className="bg-red-500 text-white px-4 py-2 rounded mt-4"
+            onClick={handleLogout}
+          >
+            Log Out
+          </button>
+        </div>
+      ) : (
+        <p className="text-gray-500">Please log in to access stock tracking features.</p>
+      )}
     </div>
   );
 };

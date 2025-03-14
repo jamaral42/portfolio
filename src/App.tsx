@@ -3,7 +3,6 @@ import { FC, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
-import Footer from './components/portfolio/Footer';
 import CookieBanner from './components/portfolio/CookiesBanner';
 
 const Portfolio = lazy(() => import('./pages/Portfolio'));
@@ -19,7 +18,6 @@ const App: FC = () => (
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/stock-tracker" element={<StockTracker />} />
       </Routes>
-      <Footer />
       <CookieBanner />
     </BrowserRouter>
   </I18nextProvider>

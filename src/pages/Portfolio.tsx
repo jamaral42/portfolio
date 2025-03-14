@@ -6,6 +6,7 @@ import AboutMe from "../components/portfolio/AboutMe";
 const Timeline = lazy(() => import("../components/portfolio/Timeline"));
 const Skills = lazy(() => import("../components/portfolio/Skills"));
 const Projects = lazy(() => import("../components/portfolio/Projects"));
+const Footer = lazy(() => import("../components/portfolio/Footer"));
 
 const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
@@ -66,6 +67,7 @@ const App: React.FC = () => {
           <Projects onHeightChange={setProjectsHeight} />
         </motion.div>
       </div>
+      <Footer />
     </motion.div>
   );
 };
