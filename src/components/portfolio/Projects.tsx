@@ -18,19 +18,19 @@ const projects = [
     titleKey: "web_projects.project1.title",
     descriptionKey: "web_projects.project1.description",
     image: portfolioImage,
-    link: "https://peartreehandcraft.pt/",
+    link: "web_projects.project1.link",
   },
   {
     titleKey: "web_projects.project2.title",
     descriptionKey: "web_projects.project2.description",
     image: peartreeImage,
-    link: "https://www.miland1food.com/",
+    link: "web_projects.project2.link",
   },
   {
     titleKey: "web_projects.project3.title",
     descriptionKey: "web_projects.project3.description",
     image: milandoneImage,
-    link: "https://joaomramaral.com//",
+    link: "web_projects.project3.link",
   },
 ];
 

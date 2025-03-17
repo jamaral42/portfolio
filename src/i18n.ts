@@ -206,14 +206,14 @@ const resources = {
         project1: {
           title: "Portfolio",
           description: "An introduction to myself, my path, and my projects",
-          link: "https://joaomramaral.com/",
+          link: "https://joaomramaral.com",
         },
         project2: {
           title: "PearTree Handcraft",
           description: `My first full-stack project, developed with the PERN stack.
           Focused on the backend handling users, orders, and feedback. Implemented email automation for orders, registrations, and password resets.
           Also developed a hidden management panel for the admin with all the necessary features.`,
-          link: "https://jamaral42.github.io/portfolio/",
+          link: "https://peartreehandcraft.pt",
         },
         project3: {
           title: "Mil&One",
@@ -432,14 +432,14 @@ const resources = {
         project1: {
           title: "Portfólio",
           description: "Introdução sobre mim, o meu percurso e os meus projetos",
-          link: "https://joaomramaral.com/",
+          link: "https://joaomramaral.com",
         },
         project2: {
           title: "PearTree Handcraft",
           description: `Meu primeiro projeto full-stack, desenvolvido com a stack PERN.
           Focado no backend para gerir utilizadores, encomendas e feedbacks. Implementei automação de emails para encomendas, registos e recuperação de password.
           Também desenvolvi um painel de gestão oculto com todas as funcionalidades necessárias.`,
-          link: "https://jamaral42.github.io/portfolio/",
+          link: "https://peartreehandcraft.pt",
         },
         project3: {
           title: "Mil&One",

@@ -7,6 +7,13 @@
     --color-charcoal-gray: #393E46;    
     --color-gunmetal: #222831;
 
+    --color-stock-primary: #0F172A; /* Dark Blue */
+    --color-stock-accent: #1E40AF; /* Bright Blue */
+    --color-stock-secondary: #64748B; /* Muted Gray */
+    --color-stock-success: #22C55E; /* Green */
+    --color-stock-danger: #EF4444; /* Red */
+    --color-stock-background: #F8FAFC; /* Light Grayish */
+
     /* Font Variables */
     --font-gugi: 'Gugi', cursive;
     --font-orbitron: 'Orbitron', sans-serif;
