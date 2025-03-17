@@ -218,7 +218,7 @@ const resources = {
         project3: {
           title: "Mil&One",
           description: "In development: Frontend and email automation for a catering company",
-          link: "https://milandone.com",
+          link: "https://www.miland1food.com",
         },        
       },
       footer: {
@@ -444,7 +444,7 @@ const resources = {
         project3: {
           title: "Mil&One",
           description: "Em desenvolvimento: Frontend e automação de emails para uma empresa de catering",
-          link: "https://milandone.com",
+          link: "https://www.miland1food.com",
         },        
       },
       footer: {

@@ -115,7 +115,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHeightChange }) => {
             >
               <a
                 className="bg-gunmetal rounded-xl flex flex-col items-center overflow-hidden cursor-pointer"
-                href={project.link}
+                href={t(project.link)}
               >
                 <h2 className="text-platinum text-md md:text-xl font-semibold mb-2">
                   {t(project.titleKey)}
