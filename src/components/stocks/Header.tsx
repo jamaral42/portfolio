@@ -1,15 +1,37 @@
-// src/components/stocks/Header.tsx
 import React from "react";
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  setShowLogin: (showLogin: boolean) => void;
+  token: string | null;
+  setToken: (token: string | null) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ setShowLogin, token, setToken }) => {
+
+  const handleLogout = () => {
+    setToken(null);
+    localStorage.removeItem("token");
+  };
+
   return (
     <header className="w-full bg-stock-primary shadow-lg p-6 flex justify-between items-center">
       <h1 className="text-2xl font-extrabold text-white tracking-tight">Stock Tracker</h1>
-      <nav className="flex items-center gap-6">
-        <a href="#" className="text-stock-secondary hover:text-white transition-colors">Home</a>
-        <a href="#" className="text-stock-secondary hover:text-white transition-colors">Dashboard</a>
-        <a href="#" className="text-stock-secondary hover:text-white transition-colors">About</a>
-      </nav>
+
+      {token ? 
+        <button 
+          className="bg-red-500 text-white py-2 px-4 rounded hover:bg-stock-secondary transition-colors cursor-pointer" 
+          onClick= {() => handleLogout()}
+        >
+          Logout
+        </button>
+        :
+        <button 
+          className="bg-stock-accent text-white py-2 px-4 rounded hover:bg-stock-secondary transition-colors cursor-pointer"
+          onClick={() => setShowLogin(true)} 
+        >
+          Login
+        </button>
+      }
     </header>
   );
 };

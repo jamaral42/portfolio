@@ -7,12 +7,17 @@
     --color-charcoal-gray: #393E46;    
     --color-gunmetal: #222831;
 
-    --color-stock-primary: #0F172A; /* Dark Blue */
-    --color-stock-accent: #1E40AF; /* Bright Blue */
-    --color-stock-secondary: #64748B; /* Muted Gray */
-    --color-stock-success: #22C55E; /* Green */
-    --color-stock-danger: #EF4444; /* Red */
-    --color-stock-background: #F8FAFC; /* Light Grayish */
+    --color-stock-primary: #0A192F;   /* Deep Midnight Blue (Strong, Professional) */
+    --color-stock-accent: #0070F3;    /* Dynamic Royal Blue (Trust, Techy Feel) */
+    --color-stock-secondary: #475569; /* Cool Slate Gray (Balanced, Readable) */
+    --color-stock-success: #10B981;   /* Bright Emerald Green (Clear, Positive) */
+    --color-stock-danger: #F43F5E;    /* Vivid Coral Red (Noticeable, Alerting) */
+    --color-stock-warning: #F59E0B;   /* Amber Orange (Caution, Market Volatility) */
+    --color-stock-background: #E5E7EB; /* Soft Light Gray (Modern, Clean) */
+    --color-stock-card: #1E293B;      /* Dark Navy Gray (Elegant, Contrast) */
+    --color-stock-border: #334155;    /* Steel Blue Gray (Subtle Separators) */
+    
+    
 
     /* Font Variables */
     --font-gugi: 'Gugi', cursive;

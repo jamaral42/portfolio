@@ -1,98 +1,201 @@
-// src/components/stocks/LoginPopup.tsx
 import { useState } from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaXmark, FaEye, FaEyeSlash } from "react-icons/fa6";
+import NotificationModal from "../../components/stocks/NotificationModal";
 
 interface LoginPopupProps {
-  onClose: () => void;
+  setShowLogin: React.Dispatch<React.SetStateAction<boolean>>;
+  setToken: (token: string | null) => void;
+  url: string;
 }
 
-export default function LoginPopup({ onClose }: LoginPopupProps) {
-  const [isRegister, setIsRegister] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [termsAccepted, setTermsAccepted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin, setToken, url }) => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [state, setState] = useState<"Login" | "Signup">("Login");
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = () => {
-    if (isRegister) {
-      if (!termsAccepted) {
-        setError("You must accept the terms and conditions.");
-        return;
-      }
-      if (password !== confirmPassword) {
-        setError("Passwords do not match.");
-        return;
-      }
-      console.log("Registering with", email, password);
-    } else {
-      console.log("Logging in with", email, password);
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrorMessage("");
+
+    if (!formData.email || !formData.password) {
+      setErrorMessage("Todos os campos são obrigatórios.");
+      return;
     }
-    onClose();
+
+    state === "Login" ? login() : signup();
+  };
+
+  const login = async () => {
+    try {
+      const response = await fetch(`${url}/login`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        setToken(responseData.accessToken);
+        localStorage.setItem("token", responseData.accessToken);
+        setShowLogin(false);
+        document.body.style.overflow = 'auto';
+      } else {
+        setErrorMessage(responseData.error);
+      }
+    } catch (error) {
+      setErrorMessage("Ocorreu um erro durante o login. Tente novamente.");
+    }
+  };
+
+  const signup = async () => {
+    try {
+      const response = await fetch(`${url}/signup`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        alert(responseData.message);
+      } else {
+        setErrorMessage(responseData.error);
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+      setErrorMessage("An error occurred during signup. Please try again.");
+    }
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+    <div className="px-6 absolute h-full w-full bg-black/40 backdrop-blur-md z-50 flex items-center justify-center">
+      <form className="bg-gray-800 w-[366px] p-7 rounded-lg shadow-md" onSubmit={handleFormSubmit}>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">{isRegister ? "Register" : "Login"}</h2>
-          <button onClick={onClose}>
-            <FaTimes className="w-5 h-5" />
-          </button>
+          <h4 className="text-2xl font-bold text-gray-200">{state}</h4>
+          <FaXmark 
+            onClick={() => setShowLogin(false)}
+            className="text-xl text-gray-400 cursor-pointer hover:text-red-500 transition-all"
+            aria-label="Fechar"
+          />
         </div>
 
-        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+        {/* Form Fields */}
+        <div className="flex flex-col gap-4 mb-6">
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-2 border rounded"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-2 border rounded"
-        />
-        {isRegister && (
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full p-2 mb-2 border rounded"
-          />
-        )}
-
-        {isRegister && (
-          <label className="flex items-center text-sm mb-2">
-            <input
-              type="checkbox"
-              checked={termsAccepted}
-              onChange={(e) => setTermsAccepted(e.target.checked)}
-              className="mr-2"
+          {state === "Signup" && (
+            <input 
+              name="username"
+              autoComplete="username"
+              value={formData.username}
+              onChange={changeHandler}
+              type="username" 
+              placeholder="Username" 
+              required 
+              className="border border-gray-600 bg-gray-700 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500" 
             />
-            I accept the terms and conditions
-          </label>
+          )}
+
+          <input 
+            name="email"
+            autoComplete="email"
+            value={formData.email}
+            onChange={changeHandler}
+            type="email" 
+            placeholder="Email" 
+            required 
+            className="border border-gray-600 bg-gray-700 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500" 
+          />
+          
+          {/* Password Field */}
+          <div className="relative">
+            <input 
+              type={showPassword ? "text" : "password"} 
+              autoComplete="current-password"
+              name="password"
+              placeholder="Password" 
+              value={formData.password}
+              onChange={changeHandler}
+              required 
+              className="border border-gray-600 bg-gray-700 text-white p-3 rounded-lg w-full outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button 
+              type="button" 
+              onClick={() => setShowPassword(!showPassword)}  
+              className="absolute inset-y-0 right-3 flex items-center text-sm text-gray-400 hover:text-gray-200 transition-all"
+              aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>   
+        </div>
+
+        {/* Error Message */}
+        {errorMessage && (
+          <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
         )}
 
-        <button
-          onClick={handleSubmit}
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+        {/* Submit Button */}
+        <button 
+          type="submit"
+          className="w-full bg-blue-500 text-white p-3 rounded-lg transition-all hover:bg-blue-600 cursor-pointer"
         >
-          {isRegister ? "Register" : "Login"}
+          {state}
         </button>
 
-        <p className="text-sm text-center mt-2">
-          {isRegister ? "Already have an account?" : "Don't have an account?"}{" "}
-          <button onClick={() => setIsRegister(!isRegister)} className="text-blue-500 ml-1">
-            {isRegister ? "Login" : "Register"}
-          </button>
-        </p>
-      </div>
+        {state === "Login" ? (
+          <p className="mt-4 text-center text-sm text-gray-300">
+            You don't have an account?{" "} 
+            <span 
+              onClick={() => setShowNotification(true)}
+              className="cursor-pointer text-yellow-500 hover:underline"
+            >
+              Signup
+            </span>
+          </p>
+        ) : (
+          <p className="mt-4 text-center text-sm text-gray-300">
+             Already have an account?{" "} 
+            <span 
+              onClick={() => setState("Login")}
+              className="cursor-pointer text-yellow-500 hover:underline"
+            >
+              Login
+            </span>
+          </p>
+        )}
+        
+
+
+      </form>
+
+      {/* Notification Modal */}
+      {showNotification && (
+        <NotificationModal
+          h1="Registo Temporariamente Indisponível"
+          h2="De momento, não estamos a aceitar novos utilizadores."
+          buttons={[{ text: "Fechar", onClick: () => setShowNotification(false) }]}
+        />
+      )}
     </div>
-  );
-}
+  ); 
+};
+
+export default LoginPopup;
