@@ -14,8 +14,9 @@ const Header: React.FC<HeaderProps> = ({ setShowLogin, token, setToken }) => {
   };
 
   return (
-    <header className="w-full bg-stock-primary shadow-lg p-6 flex justify-between items-center">
+    <header className="w-full bg-stock-primary p-6 flex justify-between items-center">
       <h1 className="text-2xl font-extrabold text-white tracking-tight">Stock Tracker</h1>
+
 
       {token ? 
         <button 
