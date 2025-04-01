@@ -164,7 +164,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin, setToken, url }) 
           <p className="mt-4 text-center text-sm text-gray-300">
             You don't have an account?{" "} 
             <span 
-              onClick={() => setState("Signup")}
+              onClick={() => setShowNotification(true)}
               className="cursor-pointer text-yellow-500 hover:underline"
             >
               Signup
