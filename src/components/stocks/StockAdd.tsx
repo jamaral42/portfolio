@@ -10,7 +10,6 @@ const StockAdd: React.FC<AddStockProps> = ({ apiUrl, token }) => {
   const [amount, setAmount] = useState<number>(1);
 
   const handleSubmit = (e: React.FormEvent) => {
-    console.log(apiUrl, token, symbol, amount);
     const addStock = async () => {
       try {
         const response = await fetch(`${apiUrl}/add-stock`, {

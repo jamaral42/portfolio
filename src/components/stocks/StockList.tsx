@@ -26,6 +26,7 @@ const StockList: React.FC<StockListProps> = ({ apiUrl, token, setNewsTicker }) =
   const [error, setError] = useState<string | null>(null);
   const [sortColumn, setSortColumn] = useState<keyof Stock | "variation" | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchStocks = async () => {
@@ -94,6 +95,35 @@ const StockList: React.FC<StockListProps> = ({ apiUrl, token, setNewsTicker }) =
     );
   };
 
+  const handleDelete = async () => {
+    if (!confirmDelete) return;
+    
+    try {
+      const response = await fetch("http://localhost:4000/remove-stock", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        // Use confirmDelete here instead of hardcoded "AGCO"
+        body: JSON.stringify({ ticker: confirmDelete }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setStocks((prevStocks) => prevStocks.filter((s) => s.ticker !== confirmDelete));
+      } else {
+        alert("Erro ao excluir a ação: " + data.error);
+      }
+    } catch (err) {
+      alert("Erro ao conectar com o servidor.");
+    } finally {
+      setConfirmDelete(null);
+    }
+  };
+  
+  
   if (loading) return <p className="p-4 text-center text-gray-500">Carregando...</p>;
   if (error) return <p className="p-4 text-center text-red-500">{error}</p>;
 
@@ -166,7 +196,6 @@ const StockList: React.FC<StockListProps> = ({ apiUrl, token, setNewsTicker }) =
                   <td className="p-2 text-center">{Number(stock.low_price || 0).toFixed(2)}</td>
                   <td className="p-2 text-center">{Number(stock.open_price || 0).toFixed(2)}</td>
                   <td className="p-2 text-center">{Number(stock.previous_close || 0).toFixed(2)}</td>
-
                   {/* Difference Column */}
                   <td
                     className={`p-2 text-center font-semibold ${
@@ -184,12 +213,35 @@ const StockList: React.FC<StockListProps> = ({ apiUrl, token, setNewsTicker }) =
                       📰 Ver Notícias
                     </button>
                   </td>
+                  <td className="p-2 text-center">
+                    <button
+                      onClick={() => setConfirmDelete(stock.ticker)}
+                      className="hover p-1 rounded-lg"
+                    >❌</button>
+                  </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
+
+      {confirmDelete && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-md flex justify-center items-center">
+          <div className="bg-gray-900 p-6 rounded-lg shadow-lg text-white text-center">
+            <p className="mb-4 text-lg text-white">Tem certeza que deseja remover {confirmDelete}?</p>
+            <button
+              onClick={handleDelete}
+              className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg mr-2"
+            >Sim, Remover</button>
+            <button
+              onClick={() => setConfirmDelete(null)}
+              className="bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-lg"
+            >Cancelar</button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
