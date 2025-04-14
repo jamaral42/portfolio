@@ -4,6 +4,7 @@ interface NewsItem {
   title: string;
   source: string;
   url: string;
+  publishedAt: string;
 }
 
 interface StockListProps {
@@ -31,6 +32,7 @@ const NewsPanel: React.FC<StockListProps> = ( { apiUrl, token, ticker } ) => {
   
         const data = await response.json();
         if (data.success) {
+          console.log(data.news);
           setNews(data.news.slice(0, 10));
         } else {
           throw new Error("Falha ao carregar notícias");
@@ -63,7 +65,7 @@ const NewsPanel: React.FC<StockListProps> = ( { apiUrl, token, ticker } ) => {
               >
                 {n.title}
               </a>
-              <p className="text-xs text-gray-400">{n.source}</p>
+              <p className="text-xs text-gray-400">{n.source} | {new Date(n.publishedAt).toLocaleString()}</p>
             </li>
           ))}
         </ul>

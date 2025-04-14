@@ -219,7 +219,12 @@ const resources = {
           title: "Mil&One",
           description: "In development: Frontend and email automation for a catering company",
           link: "https://www.miland1food.com",
-        },        
+        },
+        project4: {
+          title: "Personal",
+          description: "Projects being developed in my free time",
+          link: "https://www.joaomramaral.com/main",
+        },   
       },
       footer: {
         title: "Get in Touch",

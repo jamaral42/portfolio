@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import peartreeImage from "../../assets/peartree.jpg";
 import milandoneImage from "../../assets/milandone.jpg";
 import portfolioImage from "../../assets/portfolio.jpg";
+import portfolioImage2 from "../../assets/portfolio.jpg";
 import { motion } from "framer-motion";
 
 type ProjectsProps = {
@@ -31,6 +32,12 @@ const projects = [
     descriptionKey: "web_projects.project3.description",
     image: milandoneImage,
     link: "web_projects.project3.link",
+  },
+  {
+    titleKey: "web_projects.project4.title",
+    descriptionKey: "web_projects.project4.description",
+    image: portfolioImage2,
+    link: "web_projects.project4.link",
   },
 ];
 
