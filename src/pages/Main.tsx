@@ -31,67 +31,118 @@ interface WeatherData {
 }
 
 const Main: React.FC = () => {
-  const context = useContext(UserContext);
-  if (!context) {
-    throw new Error("UserContext must be used within a UserContextProvider");
-  }
+  const { url } = useContext(UserContext)!;
 
   const [time, setTime] = useState<string | null>(null);
   const [weather, setWeather] = useState<WeatherData | null>(null);
 
   useEffect(() => {
-    const date = new Date();
-    setTime(date.toLocaleTimeString());
+    const interval = setInterval(() => {
+      const date = new Date();
+      setTime(date.toLocaleTimeString());
+    }, 1000);
 
-    fetch("/api/weather")
-      .then((res) => res.json())
-      .then((data: WeatherData) => setWeather(data))
-      .catch((err) => console.error("Failed to fetch weather", err));
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const response = await fetch(`${url}/weather`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+        }); 
+        const data = await response.json();
+        if (data.weather) {
+          setWeather(data.weather); // ✅ Extract nested `weather`
+        } else {
+          console.warn("Unexpected weather format", data);
+        }
+      } catch (error) {
+        console.error("Error fetching weather:", error);
+      }
+    };
+    fetchWeather();
+    // Update weather data every 10 minutes
+    const interval = setInterval(fetchWeather, 10 * 60 * 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const renderWeather = () => {
     if (!weather) return null;
 
-    const { current } = weather;
+    const { current, forecast } = weather;
+
+    console.log("forecast", forecast);
+
     const iconUrl = `https://openweathermap.org/img/wn/${current.icon}@2x.png`;
 
     return (
-      <div className="flex items-center gap-4 bg-white/80 p-4 rounded-2xl shadow-md border border-gray-300">
-        <img src={iconUrl} alt={current.description} className="w-16 h-16" />
-        <div>
-          <p className="text-xl font-semibold">{current.temp}°C</p>
-          <p className="text-gray-700 capitalize">{current.description}</p>
+      <div className="grid grid-cols-3 gap-4">
+        
+        <div className="flex items-center gap-4 rounded-lg bg-white/80 p-4 ">
+          <img src={iconUrl} alt={current.description} className="w-16 h-16" />
+          <div>
+            <p className="text-xl font-semibold">{current.temp}°C</p>
+            <p className="text-gray-700 capitalize">{current.description}</p>
+          </div>
         </div>
+
+        <div className="flex items-center gap-4 rounded-lg bg-white/80 p-4 ">
+          <img src={iconUrl} alt={current.description} className="w-16 h-16" />
+          <div>
+            <p className="text-xl font-semibold">{current.temp}°C</p>
+            <p className="text-gray-700 capitalize">{current.description}</p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4 rounded-lg bg-white/80 p-4 ">
+          <img src={iconUrl} alt={current.description} className="w-16 h-16" />
+          <div>
+            <p className="text-xl font-semibold">{current.temp}°C</p>
+            <p className="text-gray-700 capitalize">{current.description}</p>
+          </div>
+        </div>
+
       </div>
     );
   };
 
   return (
     <section className="min-h-[80vh] bg-platinum text-gunmetal py-10 px-6 sm:px-10">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 space-y-4 sm:space-y-0">
+        <div>
+          <h1 className="text-3xl font-bold mb-1">Welcome Back</h1>
+          {time && <p className="text-lg text-gray-700">{time}</p>}
+        </div>
+        {renderWeather()}
+      </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10">
-        <div className="space-y-2">
-          <p className="text-2xl font-bold">{time}</p>
-          {renderWeather()}
+      <div>
+        <h2 className="text-2xl font-semibold mb-6">Projects</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {projects.map((project) => (
+            <a
+              key={project.href}
+              href={project.href}
+              className="block rounded-xl overflow-hidden border border-gray-300 shadow-md hover:shadow-lg transition duration-200 bg-white"
+            >
+              <img
+                src={project.image}
+                alt={project.alt}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <p className="text-lg font-medium text-gunmetal">{project.alt}</p>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
-
-      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 max-w-5xl w-full mx-auto">
-        {projects.map((project) => (
-          <a
-            key={project.href}
-            href={project.href}
-            className="block group rounded-2xl overflow-hidden border border-gray-200 shadow-md hover:shadow-xl transition-transform duration-300 hover:scale-105"
-          >
-            <img
-              src={project.image}
-              alt={project.alt}
-              className="w-full h-auto object-cover group-hover:opacity-95 transition-opacity duration-300"
-            />
-          </a>
-        ))}
-      </div>
-
     </section>
   );
 };
