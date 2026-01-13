@@ -8,7 +8,7 @@ const Skills = lazy(() => import("../components/portfolio/Skills"));
 const Projects = lazy(() => import("../components/portfolio/Projects"));
 const Footer = lazy(() => import("../components/portfolio/Footer"));
 
-const App: React.FC = () => {
+const App = () => {
   const { scrollYProgress } = useScroll();
   const [heroHeight, setHeroHeight] = useState(0);
   const [aboutHeight, setAboutHeight] = useState(0);
@@ -17,8 +17,7 @@ const App: React.FC = () => {
   const [projectsHeight, setProjectsHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  const calculateBaseHeight = (width: number) => (width < 768 ? 2500 : 1800);
-
+  const calculateBaseHeight = (width) => (width < 768 ? 2500 : 1800);
   const [totalHeight, setTotalHeight] = useState(
     calculateBaseHeight(window.innerWidth)
   );
@@ -46,7 +45,10 @@ const App: React.FC = () => {
   return (
     <motion.div className="relative overflow-hidden">
       {/* Outer div dynamically resizes based on totalHeight */}
-      <div className="bg-platinum transition-all duration-300" style={{ height: `${totalHeight}px` }}>
+      <div
+        className="bg-platinum transition-all duration-300"
+        style={{ height: `${totalHeight}px` }}
+      >
         <motion.div className="sticky top-0" style={{ height: heroHeight }}>
           <Hero onHeightChange={setHeroHeight} isMobile={isMobile} />
         </motion.div>

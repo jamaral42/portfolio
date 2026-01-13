@@ -9,7 +9,7 @@ const Portfolio = lazy(() => import('./pages/Portfolio'));
 const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
 const Main = lazy(() => import('./pages/Main'));
 
-const App: FC = () => (
+const App = () => (
   <I18nextProvider i18n={i18n}>
     <BrowserRouter>
       <Routes>

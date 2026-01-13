@@ -1,7 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const CookiePolicy:React.FC=() => {
+
+const CookiePolicy = () => {
   const { t } = useTranslation();
 
   return (

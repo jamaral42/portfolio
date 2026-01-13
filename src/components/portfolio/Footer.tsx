@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
 
         {/* Footer Text */}
         <p className="text-xs text-gunmetal mt-2">
-          &copy; {currentYear} {t('footer.text')}
+          <a href="/main">&copy;</a> {currentYear} {t('footer.text')}
         </p>
       </div>
     </footer>
